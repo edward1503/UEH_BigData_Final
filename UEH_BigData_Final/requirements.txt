@@ -11,9 +11,7 @@ ruff
 requests
 numpy
 mllib
-sklearn
 retry
-json
 jsonschema
 functools
 matplotlib

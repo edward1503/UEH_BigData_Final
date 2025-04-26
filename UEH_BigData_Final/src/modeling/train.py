@@ -1,139 +1,114 @@
 """
-Model Training Module - Spark ML Pipeline for F1 Prediction
+Model Training Pipeline - Production Grade
 """
-
+import sys
+import os
+from pyspark.sql import DataFrame
 from pyspark.ml import Pipeline
 from pyspark.ml.feature import VectorAssembler, StringIndexer
 from pyspark.ml.regression import RandomForestRegressor
 from pyspark.ml.evaluation import RegressionEvaluator
-from pyspark.sql import SparkSession, DataFrame
-from typing import List, Union
-from functools import reduce
-from pathlib import Path
 from src.config import settings
-import logging
+from data.utils import DataUtils
 import mlflow
+import logging
+from typing import Dict, Any
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=settings.LOG_LEVEL)
 logger = logging.getLogger(__name__)
 
-class F1ModelTrainer:
-    def __init__(self, spark: SparkSession):
+class ModelTrainer:
+    def __init__(self, spark):
         self.spark = spark
-        self.features_dir = settings.FEATURES_DIR
-        self.model_dir = settings.MODEL_DIR
-
-    def _load_training_data(self, years: List[int]) -> Union[DataFrame, None]:
-        """Load và combine features từ nhiều mùa giải"""
+        self.experiment_name = "f1_prediction_v1"
+        self.model_path = str(settings.MODEL_DIR / "rf_model")
+        
+    def _load_features(self, years: list[int]) -> DataFrame:
+        """Tải features từ nhiều mùa giải"""
         dfs = []
         for year in years:
-            try:
-                path = f"{self.features_dir}/year={year}"
-                df = self.spark.read.parquet(path)
+            path = settings.INTERIM_DIR / f"year={year}"
+            if df := DataUtils.read_parquet(self.spark, str(path)):
                 dfs.append(df)
-                logger.info(f"Loaded {year} features with {df.count()} records")
-            except Exception as e:
-                logger.warning(f"Skipping {year}: {str(e)}")
-        
-        if not dfs:
-            return None
-    
-    # Xử lý union an toàn cho Spark
-        return dfs[0] if len(dfs) == 1 else reduce(lambda a, b: a.unionByName(b), dfs)
+        return dfs[0] if len(dfs) == 1 else dfs[0].unionByName(*dfs[1:])
 
     def _build_pipeline(self) -> Pipeline:
-        """Xây dựng ML Pipeline với Spark ML"""
-        # Feature Engineering
+        """Tạo ML pipeline với cấu hình động"""
         indexer = StringIndexer(
-            inputCol="driver_id", 
+            inputCol="driver_id",
             outputCol="driver_index",
             handleInvalid="keep"
         )
         
         assembler = VectorAssembler(
-            inputCols=[
-                "avg_lap_time",
-                "total_points",
-                "avg_tyre_life",
-                "performance_ratio"
-            ],
-            outputCol="features"
+            inputCols=settings.MODEL_CONFIG["features"],
+            outputCol="feature_vector"
         )
         
-        # Model
         rf = RandomForestRegressor(
-            featuresCol="features",
-            labelCol="total_points",
-            numTrees=100,
-            maxDepth=5,
-            seed=42
+            featuresCol="feature_vector",
+            labelCol=settings.MODEL_CONFIG["target"],
+            numTrees=settings.MODEL_CONFIG["num_trees"],
+            maxDepth=settings.MODEL_CONFIG["max_depth"],
+            seed=settings.SEED
         )
         
         return Pipeline(stages=[indexer, assembler, rf])
 
-    def _log_metrics(self, model, test_df):
-        """Ghi nhận metrics và log lên MLflow"""
+    def _log_mlflow_metrics(self, model, test_df) -> Dict[str, float]:
+        """Ghi nhận metrics và artifacts lên MLflow"""
         predictions = model.transform(test_df)
         
-        evaluator = RegressionEvaluator(
-            labelCol="total_points",
-            predictionCol="prediction",
-            metricName="rmse"
-        )
-        
-        rmse = evaluator.evaluate(predictions)
-        mlflow.log_metric("rmse", rmse)
-        
-        logger.info(f"Model RMSE: {rmse}")
-        return rmse
+        metrics = {}
+        for metric in ["rmse", "mae", "r2"]:
+            evaluator = RegressionEvaluator(
+                labelCol=settings.MODEL_CONFIG["target"],
+                predictionCol="prediction",
+                metricName=metric
+            )
+            metrics[metric] = evaluator.evaluate(predictions)
+            
+        mlflow.log_metrics(metrics)
+        mlflow.spark.log_model(model, "model")
+        return metrics
 
-    def train(self, train_years: list, test_years: list):
-        """End-to-end training workflow"""
+    def train(self, train_years: list[int], test_years: list[int]) -> Dict[str, Any]:
+        """Workflow huấn luyện end-to-end"""
+        mlflow.set_tracking_uri(settings.MLFLOW_URI)
+        mlflow.set_experiment(self.experiment_name)
+        
         with mlflow.start_run():
-            # Bước 1: Load data
-            train_df = self._load_training_data(train_years)
-            test_df = self._load_training_data(test_years)
-            
-            # Bước 2: Build pipeline
-            pipeline = self._build_pipeline()
-            
-            # Bước 3: Train model
-            model = pipeline.fit(train_df)
-            
-            # Bước 4: Evaluate
-            rmse = self._log_metrics(model, test_df)
-            
-            # Bước 5: Log model và params
-            mlflow.spark.log_model(model, "model")
-            mlflow.log_params({
-                "train_years": train_years,
-                "test_years": test_years,
-                "num_trees": 100,
-                "max_depth": 5
-            })
-            
-            # Bước 6: Save model
-            model.write().overwrite().save(f"{self.model_dir}/f1_rf_model")
-            logger.info(f"Model saved to {self.model_dir}")
-            
-            return rmse
-
-if __name__ == "__main__":
-    spark = SparkSession.builder \
-        .appName("F1ModelTraining") \
-        .config("spark.jars.packages", "org.mlflow:mlflow-spark:1.30.0") \
-        .getOrCreate()
-    
-    # Cấu hình MLflow
-    mlflow.set_tracking_uri(settings.MLFLOW_URI)
-    mlflow.set_experiment("F1-Prediction")
-    
-    trainer = F1ModelTrainer(spark)
-    
-    # Train trên 2021-2023, test trên 2024
-    rmse = trainer.train(
-        train_years=[2021, 2022, 2023],
-        test_years=[2024]
-    )
-    
-    spark.stop()
+            try:
+                # Data preparation
+                train_df = self._load_features(train_years)
+                test_df = self._load_features(test_years)
+                
+                if train_df.isEmpty() or test_df.isEmpty():
+                    raise ValueError("Empty training/test data")
+                
+                # Pipeline construction
+                pipeline = self._build_pipeline()
+                
+                # Model training
+                model = pipeline.fit(train_df)
+                
+                # Evaluation
+                metrics = self._log_mlflow_metrics(model, test_df)
+                
+                # Model saving
+                model.write().overwrite().save(self.model_path)
+                logger.info(f"Model saved to {self.model_path}")
+                
+                return {
+                    "status": "success",
+                    "metrics": metrics,
+                    "model_path": self.model_path
+                }
+                
+            except Exception as e:
+                logger.error(f"Training failed: {str(e)}", exc_info=True)
+                mlflow.log_param("status", "failed")
+                return {
+                    "status": "error",
+                    "error": str(e)
+                }

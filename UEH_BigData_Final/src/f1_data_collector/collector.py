@@ -5,7 +5,7 @@ Optimized F1 Data Collector with Enhanced Error Handling
 import fastf1
 import pandas as pd
 from pathlib import Path
-from typing import Optional, Tuple, Dict, Any
+from typing import Optional, Tuple, Dict, Any, List
 from retry import retry
 import logging
 from src.config import settings
