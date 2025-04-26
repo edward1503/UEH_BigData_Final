@@ -13,6 +13,8 @@ numpy
 mllib
 sklearn
 retry
+json
+jsonschema
 functools
 matplotlib
 tqdm
