@@ -1,0 +1,139 @@
+"""
+F1 Data Collector Module - Optimized for Spark and Big Data pipelines
+graph TD
+    A[Khởi tạo Collector] --> B[Setup Cache]
+    B --> C[Tạo folder output]
+    C --> D{Lấy session data}
+    D -->|Thành công| E[Chuyển đổi timedelta]
+    D -->|Thất bại| F[Log error + Retry]
+    E --> G[Chuẩn hóa tên file]
+    G --> H[Lưu Parquet]
+    H --> I[Trả về path]
+"""
+
+import fastf1
+import pandas as pd
+import os
+import logging
+from typing import Optional, Tuple
+from retry import retry
+from pathlib import Path
+from src.config import settings  # File config central đã được chuẩn hóa
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+class F1DataCollector:
+    """High-performance data collector optimized for Spark integration"""
+    
+    def __init__(self):
+        self._init_cache() #Set up cache
+        self._verify_output_structure() # Ensure output structure
+        
+    def _init_cache(self) -> None:
+        """Initialize FastF1 cache with retry mechanism"""
+        cache_path = Path(settings.CACHE_DIR) #Avoid duplicated
+        cache_path.mkdir(parents=True, exist_ok=True) #Exit if exists
+        
+        try:
+            fastf1.Cache.enable_cache(str(cache_path))
+            logger.info(f"Cache initialized at {cache_path}")
+        except Exception as e:
+            logger.error(f"Cache initialization failed: {str(e)}")
+            raise
+
+    def _verify_output_structure(self) -> None:
+        """Create CCDS raw data directory structure"""
+        raw_path = Path(settings.RAW_DATA_DIR)
+        seasons = settings.SEASONS
+        
+        for year in seasons:
+            (raw_path / str(year)).mkdir(parents=True, exist_ok=True)
+        logger.info(f"Verified CCDS directory structure under {raw_path}")
+
+    @retry(tries=3, delay=10, backoff=2, logger=logger)
+    def get_session(self, year: int, gp_name: str, session_type: str) -> Optional[fastf1.core.Session]:
+        """Get F1 session data with exponential backoff retry"""
+        try:
+            session = fastf1.get_session(year, gp_name, session_type)
+            session.load()
+            
+            if not session.laps.empty:
+                return session
+            logger.warning(f"Empty session data for {gp_name} {year} {session_type}")
+            return None
+            
+        except Exception as e:
+            logger.error(f"Failed to load session {session_type}: {str(e)}")
+            raise
+
+    def _sanitize_filename(self, gp_name: str) -> str:
+        """Normalize GP name for filesystem safety"""
+        return (
+            gp_name.lower()
+            .replace(" ", "_")
+            .replace("-", "")
+            .replace("/", "")
+            .strip()
+        )
+
+    def _convert_timedelta(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Convert all timedelta columns to seconds"""
+        time_cols = ['LapTime', 'Sector1Time', 'Sector2Time', 'Sector3Time']
+        return df.assign(**{
+            col: df[col].dt.total_seconds() 
+            for col in time_cols 
+            if col in df.columns
+        })
+
+    def collect_race_data(self, year: int, gp_name: str) -> Optional[Path]:
+        """Main method to collect and save race data"""
+        try:
+            session = self.get_session(year, gp_name, 'R')
+            if not session:
+                return None
+
+            # Parallel processing friendly data conversion
+            laps = self._convert_timedelta(session.laps)
+            
+            # CCDS compliant output path
+            sanitized_name = self._sanitize_filename(gp_name)
+            output_path = Path(settings.RAW_DATA_DIR) / str(year) / f"{sanitized_name}_race.parquet"
+            
+            # Save in Spark-friendly format
+            laps.to_parquet(output_path, index=False)
+            logger.info(f"Saved race data to {output_path}")
+            return output_path
+            
+        except Exception as e:
+            logger.error(f"Race data collection failed for {gp_name} {year}: {str(e)}")
+            return None
+
+    def collect_qualifying_data(self, year: int, gp_name: str) -> Tuple[Optional[Path], ...]:
+        """Collect and save split qualifying data"""
+        try:
+            session = self.get_session(year, gp_name, 'Q')
+            if not session:
+                return (None, None, None)
+
+            q1, q2, q3 = session.laps.split_qualifying_sessions()
+            
+            paths = []
+            for i, df in enumerate([q1, q2, q3]):
+                if df.empty:
+                    paths.append(None)
+                    continue
+                    
+                clean_df = self._convert_timedelta(df)
+                sanitized_name = self._sanitize_filename(gp_name)
+                output_path = Path(settings.RAW_DATA_DIR) / str(year) / f"{sanitized_name}_q{i+1}.parquet"
+                
+                clean_df.to_parquet(output_path, index=False)
+                paths.append(output_path)
+            
+            logger.info(f"Saved qualifying data for {gp_name} {year}")
+            return tuple(paths)
+            
+        except Exception as e:
+            logger.error(f"Qualifying data collection failed: {str(e)}")
+            return (None, None, None)
