@@ -1,43 +1,39 @@
-project-root/
+f1_analytics/                      # Thư mục gốc dự án
+├── data/                          # Dữ liệu (không commit lên git)
+│   ├── raw/                       # Dữ liệu thô từ FastF1
+│   ├── processed/                 # Dữ liệu đã xử lý
+│   └── models/                    # Model đã train
 │
-├── README.md
-├── requirements.txt
-├── setup.cfg
-├── pyproject.toml
-├── Makefile
+├── notebooks/                     # Jupyter notebooks cho EDA
+│   ├── 01_data_exploration.ipynb
+│   └── 02_model_testing.ipynb
 │
-├── data/
-│   ├── external/   # Dữ liệu bên ngoài (nếu có)
-│   ├── interim/    # Dữ liệu trung gian (bước chuyển đổi, chuẩn hóa tạm thời)
-│   ├── processed/  # Dữ liệu đã xử lý, sẵn sàng cho modeling
-│   └── raw/        # Dữ liệu gốc, đã crawl từ FastF1 (theo từng mùa giải, từng GP)
+├── f1_analytics/                  # Package chính
+│   ├── __init__.py
+│   ├── config.py                  # Cấu hình tập trung
+│   ├── data/                      # Module xử lý dữ liệu
+│   │   ├── __init__.py
+│   │   ├── collector.py           # Thu thập dữ liệu từ FastF1
+│   │   └── processor.py           # Xử lý dữ liệu thô
+│   ├── features/                  # Module tạo features
+│   │   ├── __init__.py
+│   │   └── builder.py             # Xây dựng features
+│   └── models/                    # Module ML
+│       ├── __init__.py
+│       ├── train.py               # Training
+│       └── predict.py             # Prediction
 │
-├── docs/           # Tài liệu hướng dẫn, mô tả dự án
+├── scripts/                       # Scripts chạy từ CLI
+│   ├── collect_data.py            # Script thu thập dữ liệu
+│   ├── build_features.py          # Script tạo features
+│   └── train_model.py             # Script train model
 │
-├── models/         # Model đã train, checkpoint, file dự đoán
+├── tests/                         # Unit tests
+│   ├── test_collector.py
+│   └── test_features.py
 │
-├── notebooks/      # Notebook phân tích, EDA, pipeline, thử nghiệm
-│
-├── references/     # Data dictionary, tài liệu giải thích, bản đồ cột dữ liệu
-│
-├── reports/        # Báo cáo tự động, kết quả, hình ảnh
-│   └── figures/
-│
-└── src/            # Source code chính cho toàn bộ dự án
-    ├── __init__.py
-    ├── config.py           # Biến cấu hình chung (đường dẫn, năm, tham số Spark...)
-    ├── data/
-    │   ├── __init__.py
-    │   ├── f1_crawler.py   # Class F1DataCollector và các hàm crawl dữ liệu
-    │   ├── crawl_season.py # Script crawl toàn bộ mùa giải, lưu vào data/raw/
-    │   └── utils.py        # Hàm phụ trợ (chuẩn hóa tên file, logging, ... nếu cần)
-    ├── features/
-    │   ├── __init__.py
-    │   └── build_features.py # Tạo feature từ dữ liệu raw/interim
-    ├── modeling/
-    │   ├── __init__.py
-    │   ├── train.py        # Huấn luyện mô hình Spark MLlib
-    │   └── predict.py      # Dự đoán với model đã train
-    └── visualization/
-        ├── __init__.py
-        └── plots.py        # Hàm vẽ biểu đồ, trực quan hóa dữ liệu
+├── .env.example                   # Template biến môi trường
+├── .gitignore                     # Ignore data, cache, etc.
+├── README.md                      # Tài liệu dự án
+├── requirements.txt               # Dependencies
+└── setup.py                       # Cài đặt package
