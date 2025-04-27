@@ -386,3 +386,671 @@ This might be a bug and should be reported.
 2025-04-27 13:30:35,044 - data.collector - INFO - Saved 20 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_q_drivers.parquet
 2025-04-27 13:30:35,047 - data.collector - INFO - Processed results for Monaco Grand Prix
 2025-04-27 13:30:35,054 - data.collector - INFO - Saved 20 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_q_results.parquet
+2025-04-27 13:44:14,205 - data.collector - INFO - FastF1 cache enabled at D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\cache
+2025-04-27 13:44:14,206 - data.collector - INFO - F1Collector initialized successfully
+2025-04-27 13:44:14,207 - data.collector - INFO - Loading R session for Monaco Grand Prix 2021
+2025-04-27 13:44:14,677 - fastf1.fastf1.core - INFO - Loading data for Monaco Grand Prix - Race [v3.5.3]
+2025-04-27 13:44:14,679 - fastf1.fastf1.req - INFO - Using cached data for session_info
+2025-04-27 13:44:14,681 - fastf1.fastf1.req - INFO - Using cached data for driver_info
+2025-04-27 13:44:14,715 - fastf1.fastf1.req - INFO - Using cached data for session_status_data
+2025-04-27 13:44:14,717 - fastf1.fastf1.req - INFO - Using cached data for lap_count
+2025-04-27 13:44:14,718 - fastf1.fastf1.req - INFO - Using cached data for track_status_data
+2025-04-27 13:44:14,725 - fastf1.fastf1.req - INFO - Using cached data for _extended_timing_data
+2025-04-27 13:44:14,727 - fastf1.fastf1.req - INFO - Using cached data for timing_app_data
+2025-04-27 13:44:14,728 - fastf1.fastf1.core - INFO - Processing timing data...
+2025-04-27 13:44:16,471 - fastf1.fastf1.req - INFO - Using cached data for car_data
+2025-04-27 13:44:16,569 - fastf1.fastf1.req - INFO - Using cached data for position_data
+2025-04-27 13:44:18,093 - fastf1.fastf1.req - INFO - Using cached data for weather_data
+2025-04-27 13:44:18,095 - fastf1.fastf1.req - INFO - Using cached data for race_control_messages
+2025-04-27 13:44:18,100 - fastf1.fastf1.core - WARNING - Driver 33 completed the race distance 00:00.058000 before the recorded end of the session.
+2025-04-27 13:44:18,185 - fastf1.fastf1.core - INFO - Finished loading data for 20 drivers: ['33', '55', '4', '11', '5', '10', '44', '18', '31', '99', '7', '3', '14', '63', '6', '22', '9', '47', '77', '16']
+2025-04-27 13:44:18,193 - data.collector - INFO - Processed 1420 laps with time data in milliseconds from Monaco Grand Prix
+2025-04-27 13:44:18,218 - data.collector - INFO - Saved 1420 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_r_laps.parquet
+2025-04-27 13:44:18,240 - data.collector - INFO - Processed 20 drivers from Monaco Grand Prix
+2025-04-27 13:44:18,243 - data.collector - INFO - Saved 20 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_r_drivers.parquet
+2025-04-27 13:44:18,247 - data.collector - INFO - Processed results for Monaco Grand Prix
+2025-04-27 13:44:18,254 - data.collector - INFO - Saved 20 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_r_results.parquet
+2025-04-27 13:44:18,255 - data.collector - INFO - Loading Q session for Monaco Grand Prix 2021
+2025-04-27 13:44:18,273 - fastf1.fastf1.core - INFO - Loading data for Monaco Grand Prix - Qualifying [v3.5.3]
+2025-04-27 13:44:18,274 - fastf1.fastf1.req - INFO - Using cached data for session_info
+2025-04-27 13:44:18,275 - fastf1.fastf1.req - INFO - Using cached data for driver_info
+2025-04-27 13:44:18,299 - fastf1.fastf1.req - INFO - Using cached data for session_status_data
+2025-04-27 13:44:18,301 - fastf1.fastf1.req - INFO - Using cached data for track_status_data
+2025-04-27 13:44:18,303 - fastf1.fastf1.req - INFO - Using cached data for _extended_timing_data
+2025-04-27 13:44:18,305 - fastf1.fastf1.req - INFO - Using cached data for timing_app_data
+2025-04-27 13:44:18,306 - fastf1.fastf1.core - INFO - Processing timing data...
+2025-04-27 13:44:18,899 - fastf1.fastf1.core - WARNING - No lap data for driver 47
+2025-04-27 13:44:18,988 - fastf1.fastf1.core - WARNING - Driver  5: Lap timing integrity check failed for 1 lap(s)
+2025-04-27 13:44:19,063 - fastf1.fastf1.core - WARNING - Failed to perform lap accuracy check - all laps marked as inaccurate (driver 47)
+2025-04-27 13:44:19,090 - fastf1.fastf1.req - INFO - Using cached data for car_data
+2025-04-27 13:44:19,145 - fastf1.fastf1.req - INFO - Using cached data for position_data
+2025-04-27 13:44:20,118 - fastf1.fastf1.req - INFO - Using cached data for weather_data
+2025-04-27 13:44:20,120 - fastf1.fastf1.req - INFO - Using cached data for race_control_messages
+2025-04-27 13:44:20,179 - fastf1.fastf1.core - INFO - Finished loading data for 20 drivers: ['16', '33', '77', '55', '4', '10', '44', '5', '11', '99', '31', '3', '18', '7', '63', '22', '14', '6', '9', '47']
+2025-04-27 13:44:20,185 - data.collector - INFO - Processed 425 laps with time data in milliseconds from Monaco Grand Prix
+2025-04-27 13:44:20,195 - data.collector - INFO - Saved 425 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_q_laps.parquet
+2025-04-27 13:44:20,223 - data.collector - INFO - Processed 20 drivers from Monaco Grand Prix
+2025-04-27 13:44:20,226 - data.collector - INFO - Saved 20 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_q_drivers.parquet
+2025-04-27 13:44:20,231 - data.collector - INFO - Processed results for Monaco Grand Prix
+2025-04-27 13:44:20,237 - data.collector - INFO - Saved 20 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_q_results.parquet
+2025-04-27 13:56:43,276 - data.collector - INFO - FastF1 cache enabled at D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\cache
+2025-04-27 13:56:43,277 - data.collector - INFO - F1Collector initialized successfully
+2025-04-27 13:56:43,279 - data.collector - INFO - Loading R session for Monaco Grand Prix 2021
+2025-04-27 13:56:43,763 - fastf1.fastf1.core - INFO - Loading data for Monaco Grand Prix - Race [v3.5.3]
+2025-04-27 13:56:43,764 - fastf1.fastf1.req - INFO - Using cached data for session_info
+2025-04-27 13:56:43,765 - fastf1.fastf1.req - INFO - Using cached data for driver_info
+2025-04-27 13:56:43,796 - fastf1.fastf1.req - INFO - Using cached data for session_status_data
+2025-04-27 13:56:43,799 - fastf1.fastf1.req - INFO - Using cached data for lap_count
+2025-04-27 13:56:43,800 - fastf1.fastf1.req - INFO - Using cached data for track_status_data
+2025-04-27 13:56:43,807 - fastf1.fastf1.req - INFO - Using cached data for _extended_timing_data
+2025-04-27 13:56:43,809 - fastf1.fastf1.req - INFO - Using cached data for timing_app_data
+2025-04-27 13:56:43,810 - fastf1.fastf1.core - INFO - Processing timing data...
+2025-04-27 13:56:45,528 - fastf1.fastf1.req - INFO - Using cached data for car_data
+2025-04-27 13:56:45,629 - fastf1.fastf1.req - INFO - Using cached data for position_data
+2025-04-27 13:56:47,144 - fastf1.fastf1.req - INFO - Using cached data for weather_data
+2025-04-27 13:56:47,147 - fastf1.fastf1.req - INFO - Using cached data for race_control_messages
+2025-04-27 13:56:47,151 - fastf1.fastf1.core - WARNING - Driver 33 completed the race distance 00:00.058000 before the recorded end of the session.
+2025-04-27 13:56:47,241 - fastf1.fastf1.core - INFO - Finished loading data for 20 drivers: ['33', '55', '4', '11', '5', '10', '44', '18', '31', '99', '7', '3', '14', '63', '6', '22', '9', '47', '77', '16']
+2025-04-27 13:56:47,249 - data.collector - INFO - Processed 1420 laps from Monaco Grand Prix
+2025-04-27 13:56:47,278 - data.collector - INFO - Saved 1420 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_r_laps.parquet
+2025-04-27 13:56:47,301 - data.collector - INFO - Processed 20 drivers from Monaco Grand Prix
+2025-04-27 13:56:47,305 - data.collector - INFO - Saved 20 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_r_drivers.parquet
+2025-04-27 13:56:47,311 - data.collector - INFO - Processed results for Monaco Grand Prix
+2025-04-27 13:56:47,319 - data.collector - INFO - Saved 20 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_r_results.parquet
+2025-04-27 13:56:47,320 - data.collector - INFO - Loading Q session for Monaco Grand Prix 2021
+2025-04-27 13:56:47,337 - fastf1.fastf1.core - INFO - Loading data for Monaco Grand Prix - Qualifying [v3.5.3]
+2025-04-27 13:56:47,338 - fastf1.fastf1.req - INFO - Using cached data for session_info
+2025-04-27 13:56:47,340 - fastf1.fastf1.req - INFO - Using cached data for driver_info
+2025-04-27 13:56:47,364 - fastf1.fastf1.req - INFO - Using cached data for session_status_data
+2025-04-27 13:56:47,365 - fastf1.fastf1.req - INFO - Using cached data for track_status_data
+2025-04-27 13:56:47,368 - fastf1.fastf1.req - INFO - Using cached data for _extended_timing_data
+2025-04-27 13:56:47,370 - fastf1.fastf1.req - INFO - Using cached data for timing_app_data
+2025-04-27 13:56:47,371 - fastf1.fastf1.core - INFO - Processing timing data...
+2025-04-27 13:56:47,963 - fastf1.fastf1.core - WARNING - No lap data for driver 47
+2025-04-27 13:56:48,060 - fastf1.fastf1.core - WARNING - Driver  5: Lap timing integrity check failed for 1 lap(s)
+2025-04-27 13:56:48,140 - fastf1.fastf1.core - WARNING - Failed to perform lap accuracy check - all laps marked as inaccurate (driver 47)
+2025-04-27 13:56:48,166 - fastf1.fastf1.req - INFO - Using cached data for car_data
+2025-04-27 13:56:48,223 - fastf1.fastf1.req - INFO - Using cached data for position_data
+2025-04-27 13:56:49,222 - fastf1.fastf1.req - INFO - Using cached data for weather_data
+2025-04-27 13:56:49,225 - fastf1.fastf1.req - INFO - Using cached data for race_control_messages
+2025-04-27 13:56:49,312 - fastf1.fastf1.core - INFO - Finished loading data for 20 drivers: ['16', '33', '77', '55', '4', '10', '44', '5', '11', '99', '31', '3', '18', '7', '63', '22', '14', '6', '9', '47']
+2025-04-27 13:56:49,321 - data.collector - INFO - Processed 425 laps from Monaco Grand Prix
+2025-04-27 13:56:49,332 - data.collector - INFO - Saved 425 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_q_laps.parquet
+2025-04-27 13:56:49,356 - data.collector - INFO - Processed 20 drivers from Monaco Grand Prix
+2025-04-27 13:56:49,361 - data.collector - INFO - Saved 20 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_q_drivers.parquet
+2025-04-27 13:56:49,366 - data.collector - INFO - Processed results for Monaco Grand Prix
+2025-04-27 13:56:49,373 - data.collector - INFO - Saved 20 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_q_results.parquet
+2025-04-27 14:31:36,536 - data.collector - INFO - FastF1 cache enabled at D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\cache
+2025-04-27 14:31:36,536 - data.collector - INFO - F1Collector initialized successfully
+2025-04-27 14:31:36,537 - data.collector - INFO - Loading R session for Monaco Grand Prix 2021
+2025-04-27 14:31:36,991 - fastf1.fastf1.core - INFO - Loading data for Monaco Grand Prix - Race [v3.5.3]
+2025-04-27 14:31:36,992 - fastf1.fastf1.req - INFO - Using cached data for session_info
+2025-04-27 14:31:36,993 - fastf1.fastf1.req - INFO - Using cached data for driver_info
+2025-04-27 14:31:38,075 - fastf1.fastf1.req - INFO - Using cached data for session_status_data
+2025-04-27 14:31:38,077 - fastf1.fastf1.req - INFO - Using cached data for lap_count
+2025-04-27 14:31:38,078 - fastf1.fastf1.req - INFO - Using cached data for track_status_data
+2025-04-27 14:31:38,085 - fastf1.fastf1.req - INFO - Using cached data for _extended_timing_data
+2025-04-27 14:31:38,087 - fastf1.fastf1.req - INFO - Using cached data for timing_app_data
+2025-04-27 14:31:38,088 - fastf1.fastf1.core - INFO - Processing timing data...
+2025-04-27 14:31:40,255 - fastf1.fastf1.req - INFO - Using cached data for car_data
+2025-04-27 14:31:40,349 - fastf1.fastf1.req - INFO - Using cached data for position_data
+2025-04-27 14:31:41,856 - fastf1.fastf1.req - INFO - Using cached data for weather_data
+2025-04-27 14:31:41,858 - fastf1.fastf1.req - INFO - Using cached data for race_control_messages
+2025-04-27 14:31:41,863 - fastf1.fastf1.core - WARNING - Driver 33 completed the race distance 00:00.058000 before the recorded end of the session.
+2025-04-27 14:31:41,946 - fastf1.fastf1.core - INFO - Finished loading data for 20 drivers: ['33', '55', '4', '11', '5', '10', '44', '18', '31', '99', '7', '3', '14', '63', '6', '22', '9', '47', '77', '16']
+2025-04-27 14:31:41,949 - data.collector - WARNING - Could not process weather data: 'Track'
+2025-04-27 14:31:41,977 - data.collector - WARNING - Could not get grid positions: 'Session' object has no attribute 'session_type'
+2025-04-27 14:31:42,194 - data.collector - INFO - Processed 1420 laps with enhanced ML features from Monaco Grand Prix
+2025-04-27 14:31:42,224 - data.collector - INFO - Saved 1420 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_r_laps.parquet
+2025-04-27 14:31:42,245 - data.collector - INFO - Processed 20 drivers from Monaco Grand Prix
+2025-04-27 14:31:42,248 - data.collector - INFO - Saved 20 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_r_drivers.parquet
+2025-04-27 14:31:42,253 - data.collector - INFO - Processed results for Monaco Grand Prix
+2025-04-27 14:31:42,261 - data.collector - INFO - Saved 20 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_r_results.parquet
+2025-04-27 14:31:42,261 - data.collector - INFO - Loading Q session for Monaco Grand Prix 2021
+2025-04-27 14:31:42,278 - fastf1.fastf1.core - INFO - Loading data for Monaco Grand Prix - Qualifying [v3.5.3]
+2025-04-27 14:31:42,279 - fastf1.fastf1.req - INFO - Using cached data for session_info
+2025-04-27 14:31:42,281 - fastf1.fastf1.req - INFO - Using cached data for driver_info
+2025-04-27 14:31:42,763 - fastf1.fastf1.req - INFO - Using cached data for session_status_data
+2025-04-27 14:31:42,764 - fastf1.fastf1.req - INFO - Using cached data for track_status_data
+2025-04-27 14:31:42,766 - fastf1.fastf1.req - INFO - Using cached data for _extended_timing_data
+2025-04-27 14:31:42,768 - fastf1.fastf1.req - INFO - Using cached data for timing_app_data
+2025-04-27 14:31:42,768 - fastf1.fastf1.core - INFO - Processing timing data...
+2025-04-27 14:31:43,356 - fastf1.fastf1.core - WARNING - No lap data for driver 47
+2025-04-27 14:31:43,445 - fastf1.fastf1.core - WARNING - Driver  5: Lap timing integrity check failed for 1 lap(s)
+2025-04-27 14:31:43,519 - fastf1.fastf1.core - WARNING - Failed to perform lap accuracy check - all laps marked as inaccurate (driver 47)
+2025-04-27 14:31:43,547 - fastf1.fastf1.req - INFO - Using cached data for car_data
+2025-04-27 14:31:43,603 - fastf1.fastf1.req - INFO - Using cached data for position_data
+2025-04-27 14:31:44,589 - fastf1.fastf1.req - INFO - Using cached data for weather_data
+2025-04-27 14:31:44,592 - fastf1.fastf1.req - INFO - Using cached data for race_control_messages
+2025-04-27 14:31:44,648 - fastf1.fastf1.core - INFO - Finished loading data for 20 drivers: ['16', '33', '77', '55', '4', '10', '44', '5', '11', '99', '31', '3', '18', '7', '63', '22', '14', '6', '9', '47']
+2025-04-27 14:31:44,651 - data.collector - WARNING - Could not process weather data: 'Track'
+2025-04-27 14:31:44,659 - data.collector - WARNING - Could not get grid positions: 'Session' object has no attribute 'session_type'
+2025-04-27 14:31:44,741 - data.collector - INFO - Processed 425 laps with enhanced ML features from Monaco Grand Prix
+2025-04-27 14:31:44,752 - data.collector - INFO - Saved 425 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_q_laps.parquet
+2025-04-27 14:31:44,773 - data.collector - INFO - Processed 20 drivers from Monaco Grand Prix
+2025-04-27 14:31:44,777 - data.collector - INFO - Saved 20 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_q_drivers.parquet
+2025-04-27 14:31:44,781 - data.collector - INFO - Processed results for Monaco Grand Prix
+2025-04-27 14:31:44,788 - data.collector - INFO - Saved 20 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_q_results.parquet
+2025-04-27 14:49:41,994 - data.collector - INFO - FastF1 cache enabled at D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\cache
+2025-04-27 14:49:41,994 - data.collector - INFO - F1Collector initialized successfully
+2025-04-27 14:49:41,994 - data.collector - INFO - Loading R session for Monaco Grand Prix 2021
+2025-04-27 14:49:42,429 - fastf1.fastf1.core - INFO - Loading data for Monaco Grand Prix - Race [v3.5.3]
+2025-04-27 14:49:42,430 - fastf1.fastf1.req - INFO - Using cached data for session_info
+2025-04-27 14:49:42,432 - fastf1.fastf1.req - INFO - Using cached data for driver_info
+2025-04-27 14:49:42,461 - fastf1.fastf1.req - INFO - Using cached data for session_status_data
+2025-04-27 14:49:42,464 - fastf1.fastf1.req - INFO - Using cached data for lap_count
+2025-04-27 14:49:42,465 - fastf1.fastf1.req - INFO - Using cached data for track_status_data
+2025-04-27 14:49:42,473 - fastf1.fastf1.req - INFO - Using cached data for _extended_timing_data
+2025-04-27 14:49:42,475 - fastf1.fastf1.req - INFO - Using cached data for timing_app_data
+2025-04-27 14:49:42,477 - fastf1.fastf1.core - INFO - Processing timing data...
+2025-04-27 14:49:44,217 - fastf1.fastf1.req - INFO - Using cached data for car_data
+2025-04-27 14:49:44,317 - fastf1.fastf1.req - INFO - Using cached data for position_data
+2025-04-27 14:49:45,814 - fastf1.fastf1.req - INFO - Using cached data for weather_data
+2025-04-27 14:49:45,817 - fastf1.fastf1.req - INFO - Using cached data for race_control_messages
+2025-04-27 14:49:45,822 - fastf1.fastf1.core - WARNING - Driver 33 completed the race distance 00:00.058000 before the recorded end of the session.
+2025-04-27 14:49:45,915 - fastf1.fastf1.core - INFO - Finished loading data for 20 drivers: ['33', '55', '4', '11', '5', '10', '44', '18', '31', '99', '7', '3', '14', '63', '6', '22', '9', '47', '77', '16']
+2025-04-27 14:49:45,940 - data.collector - INFO - Saved 1420 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_r_laps.parquet
+2025-04-27 14:49:46,033 - data.collector - INFO - Saved 20 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_r_drivers.parquet
+2025-04-27 14:49:46,039 - data.collector - INFO - Saved 20 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_r_results.parquet
+2025-04-27 14:49:46,043 - data.collector - INFO - Saved 135 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_r_weather.parquet
+2025-04-27 14:49:46,043 - data.collector - INFO - Loading Q session for Monaco Grand Prix 2021
+2025-04-27 14:49:46,066 - fastf1.fastf1.core - INFO - Loading data for Monaco Grand Prix - Qualifying [v3.5.3]
+2025-04-27 14:49:46,068 - fastf1.fastf1.req - INFO - Using cached data for session_info
+2025-04-27 14:49:46,069 - fastf1.fastf1.req - INFO - Using cached data for driver_info
+2025-04-27 14:49:46,098 - fastf1.fastf1.req - INFO - Using cached data for session_status_data
+2025-04-27 14:49:46,099 - fastf1.fastf1.req - INFO - Using cached data for track_status_data
+2025-04-27 14:49:46,101 - fastf1.fastf1.req - INFO - Using cached data for _extended_timing_data
+2025-04-27 14:49:46,103 - fastf1.fastf1.req - INFO - Using cached data for timing_app_data
+2025-04-27 14:49:46,104 - fastf1.fastf1.core - INFO - Processing timing data...
+2025-04-27 14:49:46,732 - fastf1.fastf1.core - WARNING - No lap data for driver 47
+2025-04-27 14:49:46,828 - fastf1.fastf1.core - WARNING - Driver  5: Lap timing integrity check failed for 1 lap(s)
+2025-04-27 14:49:46,904 - fastf1.fastf1.core - WARNING - Failed to perform lap accuracy check - all laps marked as inaccurate (driver 47)
+2025-04-27 14:49:46,933 - fastf1.fastf1.req - INFO - Using cached data for car_data
+2025-04-27 14:49:46,999 - fastf1.fastf1.req - INFO - Using cached data for position_data
+2025-04-27 14:49:48,000 - fastf1.fastf1.req - INFO - Using cached data for weather_data
+2025-04-27 14:49:48,004 - fastf1.fastf1.req - INFO - Using cached data for race_control_messages
+2025-04-27 14:49:48,064 - fastf1.fastf1.core - INFO - Finished loading data for 20 drivers: ['16', '33', '77', '55', '4', '10', '44', '5', '11', '99', '31', '3', '18', '7', '63', '22', '14', '6', '9', '47']
+2025-04-27 14:49:48,073 - data.collector - INFO - Saved 425 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_q_laps.parquet
+2025-04-27 14:49:48,156 - data.collector - INFO - Saved 20 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_q_drivers.parquet
+2025-04-27 14:49:48,163 - data.collector - INFO - Saved 20 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_q_results.parquet
+2025-04-27 14:49:48,166 - data.collector - INFO - Saved 78 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_q_weather.parquet
+2025-04-27 14:58:47,402 - data.processor - INFO - Spark session initialized successfully
+2025-04-27 14:58:47,403 - data.processor - INFO - F1Processor initialized with Spark: True
+2025-04-27 14:58:47,404 - data.processor - INFO - Processing race data for 2021
+2025-04-27 14:58:47,406 - data.processor - INFO - Found 1 r_laps files for 2021
+2025-04-27 14:58:48,797 - data.processor - ERROR - Error reading Parquet files: An error occurred while calling o31.parquet.
+: org.apache.spark.SparkException: Job aborted due to stage failure: Task 0 in stage 0.0 failed 1 times, most recent failure: Lost task 0.0 in stage 0.0 (TID 0) (Edward executor driver): org.apache.spark.sql.AnalysisException: Illegal Parquet type: INT64 (TIMESTAMP(NANOS,false)).
+	at org.apache.spark.sql.errors.QueryCompilationErrors$.illegalParquetTypeError(QueryCompilationErrors.scala:1825)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetToSparkSchemaConverter.illegalType$1(ParquetSchemaConverter.scala:199)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetToSparkSchemaConverter.$anonfun$convertPrimitiveField$2(ParquetSchemaConverter.scala:276)
+	at scala.Option.getOrElse(Option.scala:189)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetToSparkSchemaConverter.convertPrimitiveField(ParquetSchemaConverter.scala:217)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetToSparkSchemaConverter.convertField(ParquetSchemaConverter.scala:180)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetToSparkSchemaConverter.$anonfun$convertInternal$3(ParquetSchemaConverter.scala:140)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetToSparkSchemaConverter.$anonfun$convertInternal$3$adapted(ParquetSchemaConverter.scala:110)
+	at scala.collection.TraversableLike.$anonfun$map$1(TraversableLike.scala:286)
+	at scala.collection.immutable.Range.foreach(Range.scala:158)
+	at scala.collection.TraversableLike.map(TraversableLike.scala:286)
+	at scala.collection.TraversableLike.map$(TraversableLike.scala:279)
+	at scala.collection.AbstractTraversable.map(Traversable.scala:108)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetToSparkSchemaConverter.convertInternal(ParquetSchemaConverter.scala:110)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetToSparkSchemaConverter.convert(ParquetSchemaConverter.scala:80)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat$.$anonfun$readSchemaFromFooter$2(ParquetFileFormat.scala:514)
+	at scala.Option.getOrElse(Option.scala:189)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat$.readSchemaFromFooter(ParquetFileFormat.scala:514)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat$.$anonfun$mergeSchemasInParallel$2(ParquetFileFormat.scala:494)
+	at scala.collection.immutable.Stream.map(Stream.scala:418)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat$.$anonfun$mergeSchemasInParallel$1(ParquetFileFormat.scala:494)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat$.$anonfun$mergeSchemasInParallel$1$adapted(ParquetFileFormat.scala:485)
+	at org.apache.spark.sql.execution.datasources.SchemaMergeUtils$.$anonfun$mergeSchemasInParallel$2(SchemaMergeUtils.scala:80)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitions$2(RDD.scala:858)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitions$2$adapted(RDD.scala:858)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+	at org.apache.spark.scheduler.Task.run(Task.scala:141)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+
+Driver stacktrace:
+	at org.apache.spark.scheduler.DAGScheduler.failJobAndIndependentStages(DAGScheduler.scala:2856)
+	at org.apache.spark.scheduler.DAGScheduler.$anonfun$abortStage$2(DAGScheduler.scala:2792)
+	at org.apache.spark.scheduler.DAGScheduler.$anonfun$abortStage$2$adapted(DAGScheduler.scala:2791)
+	at scala.collection.mutable.ResizableArray.foreach(ResizableArray.scala:62)
+	at scala.collection.mutable.ResizableArray.foreach$(ResizableArray.scala:55)
+	at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:49)
+	at org.apache.spark.scheduler.DAGScheduler.abortStage(DAGScheduler.scala:2791)
+	at org.apache.spark.scheduler.DAGScheduler.$anonfun$handleTaskSetFailed$1(DAGScheduler.scala:1247)
+	at org.apache.spark.scheduler.DAGScheduler.$anonfun$handleTaskSetFailed$1$adapted(DAGScheduler.scala:1247)
+	at scala.Option.foreach(Option.scala:407)
+	at org.apache.spark.scheduler.DAGScheduler.handleTaskSetFailed(DAGScheduler.scala:1247)
+	at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.doOnReceive(DAGScheduler.scala:3060)
+	at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:2994)
+	at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:2983)
+	at org.apache.spark.util.EventLoop$$anon$1.run(EventLoop.scala:49)
+	at org.apache.spark.scheduler.DAGScheduler.runJob(DAGScheduler.scala:989)
+	at org.apache.spark.SparkContext.runJob(SparkContext.scala:2393)
+	at org.apache.spark.SparkContext.runJob(SparkContext.scala:2414)
+	at org.apache.spark.SparkContext.runJob(SparkContext.scala:2433)
+	at org.apache.spark.SparkContext.runJob(SparkContext.scala:2458)
+	at org.apache.spark.rdd.RDD.$anonfun$collect$1(RDD.scala:1049)
+	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)
+	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:112)
+	at org.apache.spark.rdd.RDD.withScope(RDD.scala:410)
+	at org.apache.spark.rdd.RDD.collect(RDD.scala:1048)
+	at org.apache.spark.sql.execution.datasources.SchemaMergeUtils$.mergeSchemasInParallel(SchemaMergeUtils.scala:74)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat$.mergeSchemasInParallel(ParquetFileFormat.scala:497)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetUtils$.inferSchema(ParquetUtils.scala:132)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat.inferSchema(ParquetFileFormat.scala:79)
+	at org.apache.spark.sql.execution.datasources.DataSource.$anonfun$getOrInferFileFormatSchema$11(DataSource.scala:208)
+	at scala.Option.orElse(Option.scala:447)
+	at org.apache.spark.sql.execution.datasources.DataSource.getOrInferFileFormatSchema(DataSource.scala:205)
+	at org.apache.spark.sql.execution.datasources.DataSource.resolveRelation(DataSource.scala:407)
+	at org.apache.spark.sql.DataFrameReader.loadV1Source(DataFrameReader.scala:229)
+	at org.apache.spark.sql.DataFrameReader.$anonfun$load$2(DataFrameReader.scala:211)
+	at scala.Option.getOrElse(Option.scala:189)
+	at org.apache.spark.sql.DataFrameReader.load(DataFrameReader.scala:211)
+	at org.apache.spark.sql.DataFrameReader.parquet(DataFrameReader.scala:563)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:244)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:282)
+	at py4j.commands.AbstractCommand.invokeMethod(AbstractCommand.java:132)
+	at py4j.commands.CallCommand.execute(CallCommand.java:79)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:182)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:106)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+Caused by: org.apache.spark.sql.AnalysisException: Illegal Parquet type: INT64 (TIMESTAMP(NANOS,false)).
+	at org.apache.spark.sql.errors.QueryCompilationErrors$.illegalParquetTypeError(QueryCompilationErrors.scala:1825)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetToSparkSchemaConverter.illegalType$1(ParquetSchemaConverter.scala:199)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetToSparkSchemaConverter.$anonfun$convertPrimitiveField$2(ParquetSchemaConverter.scala:276)
+	at scala.Option.getOrElse(Option.scala:189)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetToSparkSchemaConverter.convertPrimitiveField(ParquetSchemaConverter.scala:217)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetToSparkSchemaConverter.convertField(ParquetSchemaConverter.scala:180)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetToSparkSchemaConverter.$anonfun$convertInternal$3(ParquetSchemaConverter.scala:140)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetToSparkSchemaConverter.$anonfun$convertInternal$3$adapted(ParquetSchemaConverter.scala:110)
+	at scala.collection.TraversableLike.$anonfun$map$1(TraversableLike.scala:286)
+	at scala.collection.immutable.Range.foreach(Range.scala:158)
+	at scala.collection.TraversableLike.map(TraversableLike.scala:286)
+	at scala.collection.TraversableLike.map$(TraversableLike.scala:279)
+	at scala.collection.AbstractTraversable.map(Traversable.scala:108)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetToSparkSchemaConverter.convertInternal(ParquetSchemaConverter.scala:110)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetToSparkSchemaConverter.convert(ParquetSchemaConverter.scala:80)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat$.$anonfun$readSchemaFromFooter$2(ParquetFileFormat.scala:514)
+	at scala.Option.getOrElse(Option.scala:189)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat$.readSchemaFromFooter(ParquetFileFormat.scala:514)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat$.$anonfun$mergeSchemasInParallel$2(ParquetFileFormat.scala:494)
+	at scala.collection.immutable.Stream.map(Stream.scala:418)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat$.$anonfun$mergeSchemasInParallel$1(ParquetFileFormat.scala:494)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat$.$anonfun$mergeSchemasInParallel$1$adapted(ParquetFileFormat.scala:485)
+	at org.apache.spark.sql.execution.datasources.SchemaMergeUtils$.$anonfun$mergeSchemasInParallel$2(SchemaMergeUtils.scala:80)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitions$2(RDD.scala:858)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitions$2$adapted(RDD.scala:858)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+	at org.apache.spark.scheduler.Task.run(Task.scala:141)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	... 1 more
+
+2025-04-27 14:58:48,797 - data.processor - WARNING - Failed to read lap data for 2021
+2025-04-27 14:59:18,568 - data.collector - INFO - FastF1 cache enabled at D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\cache
+2025-04-27 14:59:18,569 - data.collector - INFO - F1Collector initialized successfully
+2025-04-27 14:59:18,571 - data.collector - INFO - Loading R session for Monaco Grand Prix 2021
+2025-04-27 14:59:19,032 - fastf1.fastf1.core - INFO - Loading data for Monaco Grand Prix - Race [v3.5.3]
+2025-04-27 14:59:19,033 - fastf1.fastf1.req - INFO - Using cached data for session_info
+2025-04-27 14:59:19,035 - fastf1.fastf1.req - INFO - Using cached data for driver_info
+2025-04-27 14:59:19,068 - fastf1.fastf1.req - INFO - Using cached data for session_status_data
+2025-04-27 14:59:19,071 - fastf1.fastf1.req - INFO - Using cached data for lap_count
+2025-04-27 14:59:19,073 - fastf1.fastf1.req - INFO - Using cached data for track_status_data
+2025-04-27 14:59:19,080 - fastf1.fastf1.req - INFO - Using cached data for _extended_timing_data
+2025-04-27 14:59:19,083 - fastf1.fastf1.req - INFO - Using cached data for timing_app_data
+2025-04-27 14:59:19,083 - fastf1.fastf1.core - INFO - Processing timing data...
+2025-04-27 14:59:21,043 - fastf1.fastf1.req - INFO - Using cached data for car_data
+2025-04-27 14:59:21,152 - fastf1.fastf1.req - INFO - Using cached data for position_data
+2025-04-27 14:59:22,743 - fastf1.fastf1.req - INFO - Using cached data for weather_data
+2025-04-27 14:59:22,746 - fastf1.fastf1.req - INFO - Using cached data for race_control_messages
+2025-04-27 14:59:22,752 - fastf1.fastf1.core - WARNING - Driver 33 completed the race distance 00:00.058000 before the recorded end of the session.
+2025-04-27 14:59:22,842 - fastf1.fastf1.core - INFO - Finished loading data for 20 drivers: ['33', '55', '4', '11', '5', '10', '44', '18', '31', '99', '7', '3', '14', '63', '6', '22', '9', '47', '77', '16']
+2025-04-27 14:59:22,874 - data.collector - INFO - Saved 1420 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_r_laps.parquet
+2025-04-27 14:59:22,963 - data.collector - INFO - Saved 20 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_r_drivers.parquet
+2025-04-27 14:59:22,971 - data.collector - INFO - Saved 20 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_r_results.parquet
+2025-04-27 14:59:22,974 - data.collector - INFO - Saved 135 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_r_weather.parquet
+2025-04-27 14:59:22,975 - data.collector - INFO - Loading Q session for Monaco Grand Prix 2021
+2025-04-27 14:59:22,994 - fastf1.fastf1.core - INFO - Loading data for Monaco Grand Prix - Qualifying [v3.5.3]
+2025-04-27 14:59:22,995 - fastf1.fastf1.req - INFO - Using cached data for session_info
+2025-04-27 14:59:22,997 - fastf1.fastf1.req - INFO - Using cached data for driver_info
+2025-04-27 14:59:23,025 - fastf1.fastf1.req - INFO - Using cached data for session_status_data
+2025-04-27 14:59:23,027 - fastf1.fastf1.req - INFO - Using cached data for track_status_data
+2025-04-27 14:59:23,029 - fastf1.fastf1.req - INFO - Using cached data for _extended_timing_data
+2025-04-27 14:59:23,031 - fastf1.fastf1.req - INFO - Using cached data for timing_app_data
+2025-04-27 14:59:23,032 - fastf1.fastf1.core - INFO - Processing timing data...
+2025-04-27 14:59:23,780 - fastf1.fastf1.core - WARNING - No lap data for driver 47
+2025-04-27 14:59:23,877 - fastf1.fastf1.core - WARNING - Driver  5: Lap timing integrity check failed for 1 lap(s)
+2025-04-27 14:59:23,958 - fastf1.fastf1.core - WARNING - Failed to perform lap accuracy check - all laps marked as inaccurate (driver 47)
+2025-04-27 14:59:23,986 - fastf1.fastf1.req - INFO - Using cached data for car_data
+2025-04-27 14:59:24,041 - fastf1.fastf1.req - INFO - Using cached data for position_data
+2025-04-27 14:59:25,083 - fastf1.fastf1.req - INFO - Using cached data for weather_data
+2025-04-27 14:59:25,085 - fastf1.fastf1.req - INFO - Using cached data for race_control_messages
+2025-04-27 14:59:25,151 - fastf1.fastf1.core - INFO - Finished loading data for 20 drivers: ['16', '33', '77', '55', '4', '10', '44', '5', '11', '99', '31', '3', '18', '7', '63', '22', '14', '6', '9', '47']
+2025-04-27 14:59:25,164 - data.collector - INFO - Saved 425 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_q_laps.parquet
+2025-04-27 14:59:25,263 - data.collector - INFO - Saved 20 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_q_drivers.parquet
+2025-04-27 14:59:25,270 - data.collector - INFO - Saved 20 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_q_results.parquet
+2025-04-27 14:59:25,273 - data.collector - INFO - Saved 78 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_q_weather.parquet
+2025-04-27 14:59:29,042 - data.processor - INFO - Spark session initialized successfully
+2025-04-27 14:59:29,042 - data.processor - INFO - F1Processor initialized with Spark: True
+2025-04-27 14:59:29,043 - data.processor - INFO - Processing race data for 2021
+2025-04-27 14:59:29,044 - data.processor - INFO - Found 1 r_laps files for 2021
+2025-04-27 14:59:29,197 - data.processor - ERROR - Error reading Parquet files: An error occurred while calling o67.parquet.
+: org.apache.spark.SparkException: Job aborted due to stage failure: Task 0 in stage 0.0 failed 1 times, most recent failure: Lost task 0.0 in stage 0.0 (TID 0) (Edward executor driver): org.apache.spark.sql.AnalysisException: Illegal Parquet type: INT64 (TIMESTAMP(NANOS,false)).
+	at org.apache.spark.sql.errors.QueryCompilationErrors$.illegalParquetTypeError(QueryCompilationErrors.scala:1825)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetToSparkSchemaConverter.illegalType$1(ParquetSchemaConverter.scala:199)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetToSparkSchemaConverter.$anonfun$convertPrimitiveField$2(ParquetSchemaConverter.scala:276)
+	at scala.Option.getOrElse(Option.scala:189)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetToSparkSchemaConverter.convertPrimitiveField(ParquetSchemaConverter.scala:217)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetToSparkSchemaConverter.convertField(ParquetSchemaConverter.scala:180)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetToSparkSchemaConverter.$anonfun$convertInternal$3(ParquetSchemaConverter.scala:140)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetToSparkSchemaConverter.$anonfun$convertInternal$3$adapted(ParquetSchemaConverter.scala:110)
+	at scala.collection.TraversableLike.$anonfun$map$1(TraversableLike.scala:286)
+	at scala.collection.immutable.Range.foreach(Range.scala:158)
+	at scala.collection.TraversableLike.map(TraversableLike.scala:286)
+	at scala.collection.TraversableLike.map$(TraversableLike.scala:279)
+	at scala.collection.AbstractTraversable.map(Traversable.scala:108)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetToSparkSchemaConverter.convertInternal(ParquetSchemaConverter.scala:110)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetToSparkSchemaConverter.convert(ParquetSchemaConverter.scala:80)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat$.$anonfun$readSchemaFromFooter$2(ParquetFileFormat.scala:514)
+	at scala.Option.getOrElse(Option.scala:189)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat$.readSchemaFromFooter(ParquetFileFormat.scala:514)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat$.$anonfun$mergeSchemasInParallel$2(ParquetFileFormat.scala:494)
+	at scala.collection.immutable.Stream.map(Stream.scala:418)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat$.$anonfun$mergeSchemasInParallel$1(ParquetFileFormat.scala:494)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat$.$anonfun$mergeSchemasInParallel$1$adapted(ParquetFileFormat.scala:485)
+	at org.apache.spark.sql.execution.datasources.SchemaMergeUtils$.$anonfun$mergeSchemasInParallel$2(SchemaMergeUtils.scala:80)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitions$2(RDD.scala:858)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitions$2$adapted(RDD.scala:858)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+	at org.apache.spark.scheduler.Task.run(Task.scala:141)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+
+Driver stacktrace:
+	at org.apache.spark.scheduler.DAGScheduler.failJobAndIndependentStages(DAGScheduler.scala:2856)
+	at org.apache.spark.scheduler.DAGScheduler.$anonfun$abortStage$2(DAGScheduler.scala:2792)
+	at org.apache.spark.scheduler.DAGScheduler.$anonfun$abortStage$2$adapted(DAGScheduler.scala:2791)
+	at scala.collection.mutable.ResizableArray.foreach(ResizableArray.scala:62)
+	at scala.collection.mutable.ResizableArray.foreach$(ResizableArray.scala:55)
+	at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:49)
+	at org.apache.spark.scheduler.DAGScheduler.abortStage(DAGScheduler.scala:2791)
+	at org.apache.spark.scheduler.DAGScheduler.$anonfun$handleTaskSetFailed$1(DAGScheduler.scala:1247)
+	at org.apache.spark.scheduler.DAGScheduler.$anonfun$handleTaskSetFailed$1$adapted(DAGScheduler.scala:1247)
+	at scala.Option.foreach(Option.scala:407)
+	at org.apache.spark.scheduler.DAGScheduler.handleTaskSetFailed(DAGScheduler.scala:1247)
+	at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.doOnReceive(DAGScheduler.scala:3060)
+	at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:2994)
+	at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:2983)
+	at org.apache.spark.util.EventLoop$$anon$1.run(EventLoop.scala:49)
+	at org.apache.spark.scheduler.DAGScheduler.runJob(DAGScheduler.scala:989)
+	at org.apache.spark.SparkContext.runJob(SparkContext.scala:2393)
+	at org.apache.spark.SparkContext.runJob(SparkContext.scala:2414)
+	at org.apache.spark.SparkContext.runJob(SparkContext.scala:2433)
+	at org.apache.spark.SparkContext.runJob(SparkContext.scala:2458)
+	at org.apache.spark.rdd.RDD.$anonfun$collect$1(RDD.scala:1049)
+	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)
+	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:112)
+	at org.apache.spark.rdd.RDD.withScope(RDD.scala:410)
+	at org.apache.spark.rdd.RDD.collect(RDD.scala:1048)
+	at org.apache.spark.sql.execution.datasources.SchemaMergeUtils$.mergeSchemasInParallel(SchemaMergeUtils.scala:74)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat$.mergeSchemasInParallel(ParquetFileFormat.scala:497)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetUtils$.inferSchema(ParquetUtils.scala:132)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat.inferSchema(ParquetFileFormat.scala:79)
+	at org.apache.spark.sql.execution.datasources.DataSource.$anonfun$getOrInferFileFormatSchema$11(DataSource.scala:208)
+	at scala.Option.orElse(Option.scala:447)
+	at org.apache.spark.sql.execution.datasources.DataSource.getOrInferFileFormatSchema(DataSource.scala:205)
+	at org.apache.spark.sql.execution.datasources.DataSource.resolveRelation(DataSource.scala:407)
+	at org.apache.spark.sql.DataFrameReader.loadV1Source(DataFrameReader.scala:229)
+	at org.apache.spark.sql.DataFrameReader.$anonfun$load$2(DataFrameReader.scala:211)
+	at scala.Option.getOrElse(Option.scala:189)
+	at org.apache.spark.sql.DataFrameReader.load(DataFrameReader.scala:211)
+	at org.apache.spark.sql.DataFrameReader.parquet(DataFrameReader.scala:563)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:244)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:282)
+	at py4j.commands.AbstractCommand.invokeMethod(AbstractCommand.java:132)
+	at py4j.commands.CallCommand.execute(CallCommand.java:79)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:182)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:106)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+Caused by: org.apache.spark.sql.AnalysisException: Illegal Parquet type: INT64 (TIMESTAMP(NANOS,false)).
+	at org.apache.spark.sql.errors.QueryCompilationErrors$.illegalParquetTypeError(QueryCompilationErrors.scala:1825)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetToSparkSchemaConverter.illegalType$1(ParquetSchemaConverter.scala:199)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetToSparkSchemaConverter.$anonfun$convertPrimitiveField$2(ParquetSchemaConverter.scala:276)
+	at scala.Option.getOrElse(Option.scala:189)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetToSparkSchemaConverter.convertPrimitiveField(ParquetSchemaConverter.scala:217)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetToSparkSchemaConverter.convertField(ParquetSchemaConverter.scala:180)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetToSparkSchemaConverter.$anonfun$convertInternal$3(ParquetSchemaConverter.scala:140)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetToSparkSchemaConverter.$anonfun$convertInternal$3$adapted(ParquetSchemaConverter.scala:110)
+	at scala.collection.TraversableLike.$anonfun$map$1(TraversableLike.scala:286)
+	at scala.collection.immutable.Range.foreach(Range.scala:158)
+	at scala.collection.TraversableLike.map(TraversableLike.scala:286)
+	at scala.collection.TraversableLike.map$(TraversableLike.scala:279)
+	at scala.collection.AbstractTraversable.map(Traversable.scala:108)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetToSparkSchemaConverter.convertInternal(ParquetSchemaConverter.scala:110)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetToSparkSchemaConverter.convert(ParquetSchemaConverter.scala:80)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat$.$anonfun$readSchemaFromFooter$2(ParquetFileFormat.scala:514)
+	at scala.Option.getOrElse(Option.scala:189)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat$.readSchemaFromFooter(ParquetFileFormat.scala:514)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat$.$anonfun$mergeSchemasInParallel$2(ParquetFileFormat.scala:494)
+	at scala.collection.immutable.Stream.map(Stream.scala:418)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat$.$anonfun$mergeSchemasInParallel$1(ParquetFileFormat.scala:494)
+	at org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat$.$anonfun$mergeSchemasInParallel$1$adapted(ParquetFileFormat.scala:485)
+	at org.apache.spark.sql.execution.datasources.SchemaMergeUtils$.$anonfun$mergeSchemasInParallel$2(SchemaMergeUtils.scala:80)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitions$2(RDD.scala:858)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitions$2$adapted(RDD.scala:858)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+	at org.apache.spark.scheduler.Task.run(Task.scala:141)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	... 1 more
+
+2025-04-27 14:59:29,199 - data.processor - WARNING - Failed to read lap data for 2021
+2025-04-27 15:06:27,221 - data.processor - INFO - Spark session initialized successfully
+2025-04-27 15:06:27,221 - data.processor - INFO - F1Processor initialized with Spark: True
+2025-04-27 15:06:27,222 - data.processor - INFO - Processing race data for 2021
+2025-04-27 15:06:27,223 - data.processor - INFO - Found 1 r_laps files for 2021
+2025-04-27 15:06:29,571 - data.processor - INFO - Read 1420 rows from 1 files
+2025-04-27 15:09:47,989 - data.processor - INFO - Spark session initialized successfully
+2025-04-27 15:09:47,989 - data.processor - INFO - F1Processor initialized with Spark: True
+2025-04-27 15:09:47,990 - data.processor - INFO - Processing race data for 2021
+2025-04-27 15:09:47,991 - data.processor - INFO - Found 1 r_laps files for 2021
+2025-04-27 15:09:48,347 - data.processor - INFO - Read 1420 rows from 1 files
+2025-04-27 15:10:00,367 - data.processor - INFO - Spark session initialized successfully
+2025-04-27 15:10:00,368 - data.processor - INFO - F1Processor initialized with Spark: True
+2025-04-27 15:10:00,368 - data.processor - INFO - Processing race data for 2021
+2025-04-27 15:10:00,369 - data.processor - INFO - Found 1 r_laps files for 2021
+2025-04-27 15:10:00,699 - data.processor - INFO - Read 1420 rows from 1 files
+2025-04-27 15:10:20,491 - data.processor - INFO - Spark session initialized successfully
+2025-04-27 15:10:20,491 - data.processor - INFO - F1Processor initialized with Spark: True
+2025-04-27 15:10:20,493 - data.processor - INFO - Processing race data for 2021
+2025-04-27 15:10:20,495 - data.processor - INFO - Found 1 r_laps files for 2021
+2025-04-27 15:10:23,401 - data.processor - INFO - Read 1420 rows from 1 files
+2025-04-27 15:11:07,161 - data.processor - INFO - Spark session initialized successfully
+2025-04-27 15:11:07,162 - data.processor - INFO - F1Processor initialized with Spark: True
+2025-04-27 15:11:07,163 - data.processor - INFO - Processing race data for 2021
+2025-04-27 15:11:07,164 - data.processor - INFO - Found 1 r_laps files for 2021
+2025-04-27 15:11:07,451 - data.processor - INFO - Read 1420 rows from 1 files
+2025-04-27 15:11:21,712 - data.processor - INFO - Spark session initialized successfully
+2025-04-27 15:11:21,713 - data.processor - INFO - F1Processor initialized with Spark: True
+2025-04-27 15:11:21,713 - data.processor - INFO - Processing race data for 2021
+2025-04-27 15:11:21,715 - data.processor - INFO - Found 1 r_laps files for 2021
+2025-04-27 15:11:24,790 - data.processor - INFO - Read 1420 rows from 1 files
+2025-04-27 15:15:27,465 - data.processor - INFO - Spark session initialized successfully
+2025-04-27 15:15:27,466 - data.processor - INFO - F1Processor initialized with Spark: True
+2025-04-27 15:15:27,467 - data.processor - INFO - Processing race data for 2021
+2025-04-27 15:15:27,468 - data.processor - INFO - Found 1 r_laps files for 2021
+2025-04-27 15:15:30,267 - data.processor - INFO - Read 1420 rows from 1 files
+2025-04-27 15:16:27,287 - data.processor - INFO - Spark session initialized successfully
+2025-04-27 15:16:27,288 - data.processor - INFO - F1Processor initialized with Spark: True
+2025-04-27 15:16:27,289 - data.processor - INFO - Processing race data for 2021
+2025-04-27 15:16:27,291 - data.processor - INFO - Found 1 r_laps files for 2021
+2025-04-27 15:16:27,612 - data.processor - INFO - Read 1420 rows from 1 files
+2025-04-27 15:20:35,103 - data.processor - INFO - Spark session initialized successfully
+2025-04-27 15:20:35,103 - data.processor - INFO - F1Processor initialized with Spark: True
+2025-04-27 15:20:35,105 - data.processor - INFO - Processing race data for 2021
+2025-04-27 15:20:35,106 - data.processor - INFO - Found 1 r_laps files for 2021
+2025-04-27 15:20:37,926 - data.processor - INFO - Read 1420 rows from 1 files
+2025-04-27 17:46:35,586 - data.processor - INFO - Spark session initialized successfully
+2025-04-27 17:46:35,586 - data.processor - INFO - F1Processor initialized with Spark: True
+2025-04-27 17:46:35,587 - data.processor - INFO - Processing race data for 2021
+2025-04-27 17:46:35,588 - data.processor - INFO - Found 1 r_laps files for 2021
+2025-04-27 17:46:35,896 - data.processor - INFO - Read 1420 rows from 1 files
+2025-04-27 17:56:23,694 - data.processor - INFO - Spark session initialized successfully
+2025-04-27 17:56:23,695 - data.processor - INFO - F1Processor initialized with Spark: True
+2025-04-27 17:56:23,696 - data.processor - INFO - Processing race data for 2021
+2025-04-27 17:56:23,697 - data.processor - INFO - Found 1 r_laps files for 2021
+2025-04-27 17:56:24,014 - data.processor - INFO - Read 1420 rows from 1 files
+2025-04-27 17:56:39,215 - data.processor - INFO - Spark session initialized successfully
+2025-04-27 17:56:39,216 - data.processor - INFO - F1Processor initialized with Spark: True
+2025-04-27 17:56:39,218 - data.processor - INFO - Processing race data for 2021
+2025-04-27 17:56:39,218 - data.processor - INFO - Found 1 r_laps files for 2021
+2025-04-27 17:56:42,244 - data.processor - INFO - Read 1420 rows from 1 files
+2025-04-27 18:03:15,419 - data.processor - INFO - Spark session initialized successfully
+2025-04-27 18:03:15,420 - data.processor - INFO - F1Processor initialized with Spark: True
+2025-04-27 18:03:15,421 - data.processor - INFO - Processing race data for 2021
+2025-04-27 18:03:15,422 - data.processor - INFO - Found 1 r_laps files for 2021
+2025-04-27 18:03:18,537 - data.processor - INFO - Read 1420 rows from 1 files
+2025-04-27 18:03:18,539 - data.processor - INFO - Original DataFrame columns:
+2025-04-27 18:03:18,545 - data.processor - INFO - ['Time', 'Driver', 'DriverNumber', 'LapTime', 'LapNumber', 'Stint', 'PitOutTime', 'PitInTime', 'Sector1Time', 'Sector2Time', 'Sector3Time', 'Sector1SessionTime', 'Sector2SessionTime', 'Sector3SessionTime', 'SpeedI1', 'SpeedI2', 'SpeedFL', 'SpeedST', 'IsPersonalBest', 'Compound', 'TyreLife', 'FreshTyre', 'Team', 'LapStartTime', 'LapStartDate', 'TrackStatus', 'Position', 'Deleted', 'DeletedReason', 'FastF1Generated', 'IsAccurate']
+2025-04-27 18:03:18,970 - data.processor - INFO - Renamed DataFrame columns:
+2025-04-27 18:03:18,973 - data.processor - INFO - ['time', 'driver', 'drivernumber', 'laptime', 'lapnumber', 'stint', 'pitouttime', 'pitintime', 'sector1time', 'sector2time', 'sector3time', 'sector1sessiontime', 'sector2sessiontime', 'sector3sessiontime', 'speedi1', 'speedi2', 'speedfl', 'speedst', 'ispersonalbest', 'compound', 'tyrelife', 'freshtyre', 'team', 'lapstarttime', 'lapstartdate', 'trackstatus', 'position', 'deleted', 'deletedreason', 'fastf1generated', 'isaccurate']
+2025-04-27 18:43:57,507 - data.processor - INFO - Spark session initialized successfully
+2025-04-27 18:43:57,507 - data.processor - INFO - F1Processor initialized with Spark: True
+2025-04-27 18:43:57,509 - data.processor - INFO - Processing race data for 2021
+2025-04-27 18:43:57,510 - data.processor - INFO - Found 1 r_laps files for 2021
+2025-04-27 18:44:00,904 - data.processor - INFO - Read 1420 rows from 1 files
+2025-04-27 18:44:00,908 - data.processor - INFO - Original DataFrame columns:
+2025-04-27 18:44:00,913 - data.processor - INFO - ['Time', 'Driver', 'DriverNumber', 'LapTime', 'LapNumber', 'Stint', 'PitOutTime', 'PitInTime', 'Sector1Time', 'Sector2Time', 'Sector3Time', 'Sector1SessionTime', 'Sector2SessionTime', 'Sector3SessionTime', 'SpeedI1', 'SpeedI2', 'SpeedFL', 'SpeedST', 'IsPersonalBest', 'Compound', 'TyreLife', 'FreshTyre', 'Team', 'LapStartTime', 'LapStartDate', 'TrackStatus', 'Position', 'Deleted', 'DeletedReason', 'FastF1Generated', 'IsAccurate']
+2025-04-27 18:44:01,381 - data.processor - INFO - Renamed DataFrame columns:
+2025-04-27 18:44:01,383 - data.processor - INFO - ['time', 'driver', 'drivernumber', 'laptime', 'lapnumber', 'stint', 'pitouttime', 'pitintime', 'sector1time', 'sector2time', 'sector3time', 'sector1sessiontime', 'sector2sessiontime', 'sector3sessiontime', 'speedi1', 'speedi2', 'speedfl', 'speedst', 'ispersonalbest', 'compound', 'tyrelife', 'freshtyre', 'team', 'lapstarttime', 'lapstartdate', 'trackstatus', 'position', 'deleted', 'deletedreason', 'fastf1generated', 'isaccurate']
+2025-04-27 18:47:49,079 - data.processor - INFO - Spark session initialized successfully
+2025-04-27 18:47:49,079 - data.processor - INFO - F1Processor initialized with Spark: True
+2025-04-27 18:47:49,080 - data.processor - INFO - Processing race data for 2021
+2025-04-27 18:47:49,081 - data.processor - INFO - Found 1 r_laps files for 2021
+2025-04-27 18:47:52,763 - data.processor - INFO - Read 1420 rows from 1 files
+2025-04-27 18:47:52,766 - data.processor - INFO - Original DataFrame columns:
+2025-04-27 18:47:52,771 - data.processor - INFO - ['Time', 'Driver', 'DriverNumber', 'LapTime', 'LapNumber', 'Stint', 'PitOutTime', 'PitInTime', 'Sector1Time', 'Sector2Time', 'Sector3Time', 'Sector1SessionTime', 'Sector2SessionTime', 'Sector3SessionTime', 'SpeedI1', 'SpeedI2', 'SpeedFL', 'SpeedST', 'IsPersonalBest', 'Compound', 'TyreLife', 'FreshTyre', 'Team', 'LapStartTime', 'LapStartDate', 'TrackStatus', 'Position', 'Deleted', 'DeletedReason', 'FastF1Generated', 'IsAccurate']
+2025-04-27 18:47:53,231 - data.processor - INFO - Renamed DataFrame columns:
+2025-04-27 18:47:53,234 - data.processor - INFO - ['time', 'driver', 'drivernumber', 'laptime', 'lapnumber', 'stint', 'pitouttime', 'pitintime', 'sector1time', 'sector2time', 'sector3time', 'sector1sessiontime', 'sector2sessiontime', 'sector3sessiontime', 'speedi1', 'speedi2', 'speedfl', 'speedst', 'ispersonalbest', 'compound', 'tyrelife', 'freshtyre', 'team', 'lapstarttime', 'lapstartdate', 'trackstatus', 'position', 'deleted', 'deletedreason', 'fastf1generated', 'isaccurate']
+2025-04-27 18:53:54,947 - data.processor - INFO - Spark session initialized successfully
+2025-04-27 18:53:54,947 - data.processor - INFO - F1Processor initialized with Spark: True
+2025-04-27 18:53:54,948 - data.processor - INFO - Processing race data for 2021
+2025-04-27 18:53:54,950 - data.processor - INFO - Found 1 r_laps files for 2021
+2025-04-27 18:53:55,237 - data.processor - INFO - Read 1420 rows from 1 files
+2025-04-27 18:53:55,239 - data.processor - INFO - Original DataFrame columns:
+2025-04-27 18:53:55,241 - data.processor - INFO - ['Time', 'Driver', 'DriverNumber', 'LapTime', 'LapNumber', 'Stint', 'PitOutTime', 'PitInTime', 'Sector1Time', 'Sector2Time', 'Sector3Time', 'Sector1SessionTime', 'Sector2SessionTime', 'Sector3SessionTime', 'SpeedI1', 'SpeedI2', 'SpeedFL', 'SpeedST', 'IsPersonalBest', 'Compound', 'TyreLife', 'FreshTyre', 'Team', 'LapStartTime', 'LapStartDate', 'TrackStatus', 'Position', 'Deleted', 'DeletedReason', 'FastF1Generated', 'IsAccurate']
+2025-04-27 18:53:55,450 - data.processor - INFO - Renamed DataFrame columns:
+2025-04-27 18:53:55,452 - data.processor - INFO - ['time', 'driver', 'drivernumber', 'laptime', 'lapnumber', 'stint', 'pitouttime', 'pitintime', 'sector1time', 'sector2time', 'sector3time', 'sector1sessiontime', 'sector2sessiontime', 'sector3sessiontime', 'speedi1', 'speedi2', 'speedfl', 'speedst', 'ispersonalbest', 'compound', 'tyrelife', 'freshtyre', 'team', 'lapstarttime', 'lapstartdate', 'trackstatus', 'position', 'deleted', 'deletedreason', 'fastf1generated', 'isaccurate']
+2025-04-27 19:02:24,720 - data.processor - INFO - Spark session initialized successfully
+2025-04-27 19:02:24,721 - data.processor - INFO - F1Processor initialized with Spark: True
+2025-04-27 19:02:24,722 - data.processor - INFO - Processing race data for 2021
+2025-04-27 19:02:24,723 - data.processor - INFO - Found 1 r_laps files for 2021
+2025-04-27 19:02:27,517 - data.processor - INFO - Read 1420 rows from 1 files
+2025-04-27 19:02:27,520 - data.processor - INFO - Original DataFrame columns:
+2025-04-27 19:02:27,524 - data.processor - INFO - ['Time', 'Driver', 'DriverNumber', 'LapTime', 'LapNumber', 'Stint', 'PitOutTime', 'PitInTime', 'Sector1Time', 'Sector2Time', 'Sector3Time', 'Sector1SessionTime', 'Sector2SessionTime', 'Sector3SessionTime', 'SpeedI1', 'SpeedI2', 'SpeedFL', 'SpeedST', 'IsPersonalBest', 'Compound', 'TyreLife', 'FreshTyre', 'Team', 'LapStartTime', 'LapStartDate', 'TrackStatus', 'Position', 'Deleted', 'DeletedReason', 'FastF1Generated', 'IsAccurate']
+2025-04-27 19:02:27,911 - data.processor - INFO - Renamed DataFrame columns:
+2025-04-27 19:02:27,913 - data.processor - INFO - ['time', 'driver', 'drivernumber', 'laptime', 'lapnumber', 'stint', 'pitouttime', 'pitintime', 'sector1time', 'sector2time', 'sector3time', 'sector1sessiontime', 'sector2sessiontime', 'sector3sessiontime', 'speedi1', 'speedi2', 'speedfl', 'speedst', 'ispersonalbest', 'compound', 'tyrelife', 'freshtyre', 'team', 'lapstarttime', 'lapstartdate', 'trackstatus', 'position', 'deleted', 'deletedreason', 'fastf1generated', 'isaccurate']
+2025-04-27 19:02:30,285 - data.processor - INFO - Processed race data saved to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\processed\2021\race_features.parquet
+2025-04-27 19:06:41,795 - data.collector - INFO - FastF1 cache enabled at D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\cache
+2025-04-27 19:06:41,796 - data.collector - INFO - F1Collector initialized successfully
+2025-04-27 19:06:41,797 - data.collector - INFO - Loading R session for Monaco Grand Prix 2021
+2025-04-27 19:06:42,404 - fastf1.fastf1.core - INFO - Loading data for Monaco Grand Prix - Race [v3.5.3]
+2025-04-27 19:06:42,405 - fastf1.fastf1.req - INFO - Using cached data for session_info
+2025-04-27 19:06:42,408 - fastf1.fastf1.req - INFO - Using cached data for driver_info
+2025-04-27 19:06:43,536 - fastf1.fastf1.req - INFO - Using cached data for session_status_data
+2025-04-27 19:06:43,538 - fastf1.fastf1.req - INFO - Using cached data for lap_count
+2025-04-27 19:06:43,540 - fastf1.fastf1.req - INFO - Using cached data for track_status_data
+2025-04-27 19:06:43,552 - fastf1.fastf1.req - INFO - Using cached data for _extended_timing_data
+2025-04-27 19:06:43,555 - fastf1.fastf1.req - INFO - Using cached data for timing_app_data
+2025-04-27 19:06:43,557 - fastf1.fastf1.core - INFO - Processing timing data...
+2025-04-27 19:06:45,868 - fastf1.fastf1.req - INFO - Using cached data for car_data
+2025-04-27 19:06:45,979 - fastf1.fastf1.req - INFO - Using cached data for position_data
+2025-04-27 19:06:47,530 - fastf1.fastf1.req - INFO - Using cached data for weather_data
+2025-04-27 19:06:47,534 - fastf1.fastf1.req - INFO - Using cached data for race_control_messages
+2025-04-27 19:06:47,539 - fastf1.fastf1.core - WARNING - Driver 33 completed the race distance 00:00.058000 before the recorded end of the session.
+2025-04-27 19:06:47,620 - fastf1.fastf1.core - INFO - Finished loading data for 20 drivers: ['33', '55', '4', '11', '5', '10', '44', '18', '31', '99', '7', '3', '14', '63', '6', '22', '9', '47', '77', '16']
+2025-04-27 19:06:47,698 - data.collector - INFO - Saved 1420 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_r_laps.parquet
+2025-04-27 19:06:47,818 - data.collector - INFO - Saved 20 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_r_drivers.parquet
+2025-04-27 19:06:47,825 - data.collector - INFO - Saved 20 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_r_results.parquet
+2025-04-27 19:06:47,829 - data.collector - INFO - Saved 135 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_r_weather.parquet
+2025-04-27 19:06:47,830 - data.collector - INFO - Loading Q session for Monaco Grand Prix 2021
+2025-04-27 19:06:47,851 - fastf1.fastf1.core - INFO - Loading data for Monaco Grand Prix - Qualifying [v3.5.3]
+2025-04-27 19:06:47,853 - fastf1.fastf1.req - INFO - Using cached data for session_info
+2025-04-27 19:06:47,855 - fastf1.fastf1.req - INFO - Using cached data for driver_info
+2025-04-27 19:06:48,324 - fastf1.fastf1.req - INFO - Using cached data for session_status_data
+2025-04-27 19:06:48,327 - fastf1.fastf1.req - INFO - Using cached data for track_status_data
+2025-04-27 19:06:48,330 - fastf1.fastf1.req - INFO - Using cached data for _extended_timing_data
+2025-04-27 19:06:48,333 - fastf1.fastf1.req - INFO - Using cached data for timing_app_data
+2025-04-27 19:06:48,334 - fastf1.fastf1.core - INFO - Processing timing data...
+2025-04-27 19:06:48,997 - fastf1.fastf1.core - WARNING - No lap data for driver 47
+2025-04-27 19:06:49,088 - fastf1.fastf1.core - WARNING - Driver  5: Lap timing integrity check failed for 1 lap(s)
+2025-04-27 19:06:49,161 - fastf1.fastf1.core - WARNING - Failed to perform lap accuracy check - all laps marked as inaccurate (driver 47)
+2025-04-27 19:06:49,210 - fastf1.fastf1.req - INFO - Using cached data for car_data
+2025-04-27 19:06:49,281 - fastf1.fastf1.req - INFO - Using cached data for position_data
+2025-04-27 19:06:50,334 - fastf1.fastf1.req - INFO - Using cached data for weather_data
+2025-04-27 19:06:50,337 - fastf1.fastf1.req - INFO - Using cached data for race_control_messages
+2025-04-27 19:06:50,399 - fastf1.fastf1.core - INFO - Finished loading data for 20 drivers: ['16', '33', '77', '55', '4', '10', '44', '5', '11', '99', '31', '3', '18', '7', '63', '22', '14', '6', '9', '47']
+2025-04-27 19:06:50,408 - data.collector - INFO - Saved 425 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_q_laps.parquet
+2025-04-27 19:06:50,486 - data.collector - INFO - Saved 20 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_q_drivers.parquet
+2025-04-27 19:06:50,493 - data.collector - INFO - Saved 20 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_q_results.parquet
+2025-04-27 19:06:50,495 - data.collector - INFO - Saved 78 records to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\raw\2021\monaco_grand_prix_q_weather.parquet
+2025-04-27 20:33:22,627 - data.processor - INFO - Spark session initialized successfully
+2025-04-27 20:33:22,629 - data.processor - INFO - F1Processor initialized with Spark: True
+2025-04-27 20:33:22,630 - data.processor - INFO - Processing race data for 2021
+2025-04-27 20:33:22,632 - data.processor - INFO - Found 1 r_laps files for 2021
+2025-04-27 20:33:23,104 - data.processor - INFO - Read 1420 rows from 1 files
+2025-04-27 20:33:23,107 - data.processor - INFO - Original DataFrame columns:
+2025-04-27 20:33:23,110 - data.processor - INFO - ['Time', 'Driver', 'DriverNumber', 'LapTime', 'LapNumber', 'Stint', 'PitOutTime', 'PitInTime', 'Sector1Time', 'Sector2Time', 'Sector3Time', 'Sector1SessionTime', 'Sector2SessionTime', 'Sector3SessionTime', 'SpeedI1', 'SpeedI2', 'SpeedFL', 'SpeedST', 'IsPersonalBest', 'Compound', 'TyreLife', 'FreshTyre', 'Team', 'LapStartTime', 'LapStartDate', 'TrackStatus', 'Position', 'Deleted', 'DeletedReason', 'FastF1Generated', 'IsAccurate']
+2025-04-27 20:33:23,318 - data.processor - INFO - Renamed DataFrame columns:
+2025-04-27 20:33:23,320 - data.processor - INFO - ['time', 'driver', 'drivernumber', 'laptime', 'lapnumber', 'stint', 'pitouttime', 'pitintime', 'sector1time', 'sector2time', 'sector3time', 'sector1sessiontime', 'sector2sessiontime', 'sector3sessiontime', 'speedi1', 'speedi2', 'speedfl', 'speedst', 'ispersonalbest', 'compound', 'tyrelife', 'freshtyre', 'team', 'lapstarttime', 'lapstartdate', 'trackstatus', 'position', 'deleted', 'deletedreason', 'fastf1generated', 'isaccurate']
+2025-04-27 20:33:24,769 - data.processor - INFO - Processed race data saved to D:\VSCODE\UEH_BigData_Final\UEH_BigData_Final\data\processed\2021\race_features.parquet

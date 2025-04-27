@@ -1,11 +1,10 @@
 """
-F1 Data Processor Module
+F1 Data Processor Module - Feature Selection & Engineering
 
 Module này chịu trách nhiệm:
-1. Đọc dữ liệu thô từ thư mục raw
-2. Làm sạch và chuyển đổi dữ liệu
-3. Tích hợp dữ liệu từ nhiều nguồn
-4. Lưu dữ liệu đã xử lý vào thư mục processed
+1. Đọc dữ liệu thô từ thư mục RAW
+2. Lựa chọn và xây dựng các đặc trưng quan trọng
+3. Lưu dữ liệu đã xử lý vào thư mục PROCESSED
 """
 
 import pandas as pd
@@ -16,7 +15,8 @@ from pathlib import Path
 from typing import Dict, List, Optional, Union, Any
 from pyspark.sql import SparkSession, DataFrame as SparkDataFrame
 from pyspark.sql import functions as F
-from pyspark.sql.types import StructType, StructField, StringType, DoubleType, IntegerType, TimestampType
+from pyspark.sql.window import Window
+from pyspark.sql.types import StructType, StructField, StringType, DoubleType, IntegerType, BooleanType
 
 # Import cấu hình từ module config
 import config
@@ -29,7 +29,7 @@ class F1Processor:
     Class xử lý dữ liệu F1 từ raw đến processed
     """
     
-    def __init__(self, use_spark: bool = False):
+    def __init__(self, use_spark: bool = True):
         """
         Khởi tạo processor
         
@@ -50,9 +50,9 @@ class F1Processor:
             self.spark = (
                 SparkSession.builder
                 .appName("F1DataProcessor")
-                .config("spark.jars.packages", "org.apache.hadoop:hadoop-aws:3.3.1")
                 .config("spark.sql.execution.arrow.pyspark.enabled", "true")
                 .config("spark.sql.session.timeZone", "UTC")
+                .config("spark.sql.legacy.parquet.nanosAsLong", "true")  # Thêm cấu hình này để xử lý timestamp
             )
             
             # Thêm các cấu hình từ config
@@ -66,53 +66,35 @@ class F1Processor:
             logger.error(f"Failed to initialize Spark: {str(e)}")
             self.use_spark = False
     
-    def _get_raw_files(self, year: int, data_type: str = None) -> List[Path]:
+    def _get_raw_files(self, year: int, data_type: str = "r_laps") -> List[Path]:
         """
         Lấy danh sách file raw cho một năm và loại dữ liệu
         
         Args:
             year: Năm cần lấy dữ liệu
-            data_type: Loại dữ liệu (laps, drivers, results), None để lấy tất cả
+            data_type: Loại dữ liệu (r_laps, r_drivers, r_results)
             
         Returns:
             Danh sách đường dẫn file
         """
-        year_dir = config.get_path_for_season(year, create=False)
+        year_dir = config.RAW_DATA_DIR / str(year)
         
         if not year_dir.exists():
             logger.warning(f"No data directory found for {year}")
             return []
             
-        pattern = f"*_{data_type}.parquet" if data_type else "*.parquet"
+        pattern = f"*_{data_type}.parquet"
         files = list(year_dir.glob(pattern))
         
-        logger.info(f"Found {len(files)} {data_type or 'all'} files for {year}")
+        logger.info(f"Found {len(files)} {data_type} files for {year}")
         return files
     
-    def _read_parquet_pandas(self, file_path: Path) -> Optional[pd.DataFrame]:
+    def _read_parquet_spark(self, file_paths: List[Path]) -> Optional[SparkDataFrame]:
         """
-        Đọc file Parquet bằng Pandas
+        Đọc nhiều file Parquet bằng Spark
         
         Args:
-            file_path: Đường dẫn file
-            
-        Returns:
-            DataFrame hoặc None nếu có lỗi
-        """
-        try:
-            df = pd.read_parquet(file_path)
-            logger.debug(f"Read {len(df)} rows from {file_path}")
-            return df
-        except Exception as e:
-            logger.error(f"Error reading {file_path}: {str(e)}")
-            return None
-    
-    def _read_parquet_spark(self, file_path: Path) -> Optional[SparkDataFrame]:
-        """
-        Đọc file Parquet bằng Spark
-        
-        Args:
-            file_path: Đường dẫn file
+            file_paths: Danh sách đường dẫn file
             
         Returns:
             Spark DataFrame hoặc None nếu có lỗi
@@ -121,159 +103,162 @@ class F1Processor:
             logger.error("Spark session not initialized")
             return None
             
+        if not file_paths:
+            logger.warning("No files to read")
+            return None
+            
         try:
-            df = self.spark.read.parquet(str(file_path))
-            logger.debug(f"Read Spark DataFrame from {file_path}")
+            # Chuyển đổi Path thành string
+            str_paths = [str(path) for path in file_paths]
+            
+            # Đọc tất cả các file
+            df = self.spark.read.parquet(*str_paths)
+            logger.info(f"Read {df.count()} rows from {len(file_paths)} files")
+            
+            # In schema để debug
+            logger.debug("DataFrame schema:")
+            df.printSchema()
+            
             return df
         except Exception as e:
-            logger.error(f"Error reading {file_path} with Spark: {str(e)}")
+            logger.error(f"Error reading Parquet files: {str(e)}")
             return None
     
-    def clean_lap_data(self, df: Union[pd.DataFrame, SparkDataFrame]) -> Union[pd.DataFrame, SparkDataFrame]:
+    def select_features(self, df: SparkDataFrame) -> SparkDataFrame:
         """
-        Làm sạch dữ liệu lap
+        Chọn và xây dựng các đặc trưng quan trọng
         
         Args:
             df: DataFrame chứa dữ liệu lap
             
         Returns:
-            DataFrame đã làm sạch
+            DataFrame với các đặc trưng đã chọn
         """
-        if self.use_spark and isinstance(df, SparkDataFrame):
-            # Xử lý với Spark
-            # Loại bỏ các lap không hợp lệ
-            df = df.filter(F.col("laptime").isNotNull())
-            
-            # Chuyển đổi kiểu dữ liệu
-            df = df.withColumn("laptime", F.col("laptime").cast("double"))
-            df = df.withColumn("sector1time", F.col("sector1time").cast("double"))
-            df = df.withColumn("sector2time", F.col("sector2time").cast("double"))
-            df = df.withColumn("sector3time", F.col("sector3time").cast("double"))
-            
-            # Tính toán thêm các trường
-            df = df.withColumn("is_valid_lap", 
-                              (F.col("laptime") > 0) & 
-                              (F.col("laptime") < 300))  # Lap hợp lệ < 5 phút
-            
-            return df
-        else:
-            # Xử lý với Pandas
-            # Tạo bản sao để tránh warning
-            df = df.copy()
-            
-            # Loại bỏ các lap không hợp lệ
-            df = df.dropna(subset=['laptime'])
-            
-            # Chuyển đổi kiểu dữ liệu
-            numeric_cols = ['laptime', 'sector1time', 'sector2time', 'sector3time']
-            for col in numeric_cols:
-                if col in df.columns:
-                    df[col] = pd.to_numeric(df[col], errors='coerce')
-            
-            # Tính toán thêm các trường
-            df['is_valid_lap'] = (df['laptime'] > 0) & (df['laptime'] < 300)  # Lap hợp lệ < 5 phút
-            
-            return df
-    
-    def clean_driver_data(self, df: Union[pd.DataFrame, SparkDataFrame]) -> Union[pd.DataFrame, SparkDataFrame]:
-        """
-        Làm sạch dữ liệu driver
+        # In schema để debug
+        logger.info("Original DataFrame columns:")
+        logger.info(str(df.columns))
         
-        Args:
-            df: DataFrame chứa dữ liệu driver
-            
-        Returns:
-            DataFrame đã làm sạch
-        """
-        if self.use_spark and isinstance(df, SparkDataFrame):
-            # Xử lý với Spark
-            # Loại bỏ các bản ghi trùng lặp
-            df = df.dropDuplicates(['driver_number', 'year', 'event_name'])
-            
-            # Chuẩn hóa tên team
-            df = df.withColumn("team_name", F.trim(F.col("team_name")))
-            
-            return df
-        else:
-            # Xử lý với Pandas
-            df = df.copy()
-            
-            # Loại bỏ các bản ghi trùng lặp
-            df = df.drop_duplicates(subset=['driver_number', 'year', 'event_name'])
-            
-            # Chuẩn hóa tên team
-            if 'team_name' in df.columns:
-                df['team_name'] = df['team_name'].str.strip()
-            
-            return df
-    
-    def merge_lap_with_driver(self, lap_df: Union[pd.DataFrame, SparkDataFrame], 
-                             driver_df: Union[pd.DataFrame, SparkDataFrame]) -> Union[pd.DataFrame, SparkDataFrame]:
-        """
-        Kết hợp dữ liệu lap với dữ liệu driver
+        # Chuẩn hóa tên cột thành lowercase
+        renamed_df = df
+        for col in df.columns:
+            renamed_df = renamed_df.withColumnRenamed(col, col.lower())
         
-        Args:
-            lap_df: DataFrame chứa dữ liệu lap
-            driver_df: DataFrame chứa dữ liệu driver
+        # In schema sau khi chuẩn hóa
+        logger.info("Renamed DataFrame columns:")
+        logger.info(str(renamed_df.columns))
+        
+        # Chọn các cột cơ bản
+        selected_cols = [
+            # Thông tin cơ bản về tay đua và vòng đua
+            "driver", "drivernumber", "team", "lapnumber", "position",
             
-        Returns:
-            DataFrame đã kết hợp
-        """
-        if self.use_spark and isinstance(lap_df, SparkDataFrame) and isinstance(driver_df, SparkDataFrame):
-            # Xử lý với Spark
-            # Join dữ liệu
-            merged_df = lap_df.join(
-                driver_df,
-                on=['driver_number', 'year', 'event_name'],
-                how='left'
+            # Thông tin thời gian (milliseconds)
+            "laptime", "sector1time", "sector2time", "sector3time", 
+            "pitintime", "pitouttime",
+            
+            # Thông tin về lốp xe
+            "compound", "tyrelife", "stint", "freshtyre",
+            
+            # Thông tin về tốc độ
+            "speedi1", "speedi2", "speedfl", "speedst",
+            
+            # Thông tin bổ sung
+            "trackstatus", "ispersonalbest", "year", "event_name", "track_name"
+        ]
+        
+        # Lọc các cột tồn tại trong DataFrame
+        existing_cols = [col for col in selected_cols if col in renamed_df.columns]
+        
+        # Chọn các cột cơ bản
+        result_df = renamed_df.select(existing_cols)
+        
+        # Tính các đặc trưng bổ sung
+        
+        # 1. Chuyển đổi thời gian từ seconds sang milliseconds (nếu cần)
+        time_cols = ["laptime", "sector1time", "sector2time", "sector3time", 
+                    "pitintime", "pitouttime"]
+        for col in time_cols:
+            if col in existing_cols:
+                result_df = result_df.withColumn(col, F.col(col) * 1000)
+        
+        # 2. Tính tỷ lệ sector
+        sector_cols = ["sector1time", "sector2time", "sector3time"]
+        for sector_col in sector_cols:
+            if sector_col in existing_cols and "laptime" in existing_cols:
+                ratio_col = f"{sector_col}_ratio"
+                result_df = result_df.withColumn(
+                    ratio_col, 
+                    F.when(F.col("laptime") > 0, F.col(sector_col) / F.col("laptime"))
+                    .otherwise(None)
+                )
+        
+        # 3. Tính số lần pit stop
+        if "pitintime" in existing_cols:
+            result_df = result_df.withColumn(
+                "pit_stop_count", 
+                F.when(F.col("pitintime").isNotNull(), 1)
+                .otherwise(0)
+            )
+        
+        # 4. Tính delta với vòng trước và vòng tốt nhất
+        if "drivernumber" in existing_cols and "lapnumber" in existing_cols and "laptime" in existing_cols:
+            window_spec = Window.partitionBy("drivernumber").orderBy("lapnumber")
+            
+            result_df = result_df.withColumn(
+                "prev_laptime", 
+                F.lag("laptime", 1).over(window_spec)
             )
             
-            return merged_df
-        else:
-            # Xử lý với Pandas
-            # Join dữ liệu
-            merged_df = pd.merge(
-                lap_df,
-                driver_df,
-                on=['driver_number', 'year', 'event_name'],
-                how='left'
+            result_df = result_df.withColumn(
+                "delta_previous", 
+                F.col("laptime") - F.col("prev_laptime")
             )
             
-            return merged_df
-    
-    def save_processed_data(self, df: Union[pd.DataFrame, SparkDataFrame], 
-                           year: int, data_type: str) -> Path:
-        """
-        Lưu dữ liệu đã xử lý
-        
-        Args:
-            df: DataFrame cần lưu
-            year: Năm của dữ liệu
-            data_type: Loại dữ liệu
+            # 5. Tính delta với vòng tốt nhất
+            window_spec_min = Window.partitionBy("drivernumber")
             
-        Returns:
-            Đường dẫn đến file đã lưu
-        """
-        # Tạo thư mục cho năm
-        year_dir = config.PROCESSED_DATA_DIR / str(year)
-        year_dir.mkdir(parents=True, exist_ok=True)
-        
-        # Tạo đường dẫn file
-        file_path = year_dir / f"{data_type}.parquet"
-        
-        if self.use_spark and isinstance(df, SparkDataFrame):
-            # Lưu với Spark
-            df.write.mode("overwrite").parquet(str(file_path))
-        else:
-            # Lưu với Pandas
-            df.to_parquet(file_path, index=False)
+            result_df = result_df.withColumn(
+                "best_laptime", 
+                F.min("laptime").over(window_spec_min)
+            )
             
-        logger.info(f"Saved processed {data_type} data to {file_path}")
-        return file_path
+            result_df = result_df.withColumn(
+                "delta_optimal", 
+                F.col("laptime") - F.col("best_laptime")
+            )
+        
+        # 6. Tính tyre degradation (đơn giản)
+        if "tyrelife" in existing_cols and "laptime" in existing_cols:
+            result_df = result_df.withColumn(
+                "tyre_degradation", 
+                F.when(F.col("tyrelife") > 0, 
+                      (F.col("laptime") - F.col("best_laptime")) / F.col("tyrelife"))
+                .otherwise(0)
+            )
+        
+        # 7. Tính khoảng cách với xe trước/sau
+        if "lapnumber" in existing_cols and "position" in existing_cols and "laptime" in existing_cols:
+            window_spec_pos = Window.partitionBy("lapnumber").orderBy("position")
+            
+            result_df = result_df.withColumn(
+                "gap_ahead", 
+                F.lead("laptime", 1).over(window_spec_pos) - F.col("laptime")
+            )
+            
+            result_df = result_df.withColumn(
+                "gap_behind", 
+                F.col("laptime") - F.lag("laptime", 1).over(window_spec_pos)
+            )
+        
+        # Loại bỏ các cột tạm thời
+        if "prev_laptime" in result_df.columns and "best_laptime" in result_df.columns:
+            result_df = result_df.drop("prev_laptime", "best_laptime")
+        
+        return result_df
     
-    def process_season_laps(self, year: int) -> Optional[Path]:
+    def process_race_data(self, year: int) -> Optional[Path]:
         """
-        Xử lý dữ liệu lap cho một mùa giải
+        Xử lý dữ liệu đua cho một năm
         
         Args:
             year: Năm cần xử lý
@@ -281,88 +266,39 @@ class F1Processor:
         Returns:
             Đường dẫn đến file đã lưu hoặc None nếu có lỗi
         """
-        logger.info(f"Processing lap data for {year}")
+        logger.info(f"Processing race data for {year}")
         
         # Lấy danh sách file lap
-        lap_files = self._get_raw_files(year, "laps")
+        lap_files = self._get_raw_files(year, "r_laps")
         if not lap_files:
             logger.warning(f"No lap data found for {year}")
             return None
-            
-        # Lấy danh sách file driver
-        driver_files = self._get_raw_files(year, "drivers")
-        if not driver_files:
-            logger.warning(f"No driver data found for {year}")
         
-        # Đọc và kết hợp dữ liệu
-        if self.use_spark:
-            # Xử lý với Spark
-            lap_dfs = [self._read_parquet_spark(file) for file in lap_files]
-            lap_dfs = [df for df in lap_dfs if df is not None]
-            
-            if not lap_dfs:
-                logger.warning(f"Failed to read any lap data for {year}")
-                return None
-                
-            # Union tất cả DataFrame
-            lap_data = lap_dfs[0]
-            for df in lap_dfs[1:]:
-                lap_data = lap_data.union(df)
-                
-            # Làm sạch dữ liệu
-            lap_data = self.clean_lap_data(lap_data)
-            
-            # Xử lý dữ liệu driver nếu có
-            if driver_files:
-                driver_dfs = [self._read_parquet_spark(file) for file in driver_files]
-                driver_dfs = [df for df in driver_dfs if df is not None]
-                
-                if driver_dfs:
-                    driver_data = driver_dfs[0]
-                    for df in driver_dfs[1:]:
-                        driver_data = driver_data.union(df)
-                        
-                    driver_data = self.clean_driver_data(driver_data)
-                    
-                    # Kết hợp dữ liệu
-                    lap_data = self.merge_lap_with_driver(lap_data, driver_data)
-            
-            # Lưu dữ liệu đã xử lý
-            return self.save_processed_data(lap_data, year, "laps")
-            
-        else:
-            # Xử lý với Pandas
-            lap_dfs = [self._read_parquet_pandas(file) for file in lap_files]
-            lap_dfs = [df for df in lap_dfs if df is not None]
-            
-            if not lap_dfs:
-                logger.warning(f"Failed to read any lap data for {year}")
-                return None
-                
-            # Concat tất cả DataFrame
-            lap_data = pd.concat(lap_dfs, ignore_index=True)
-            
-            # Làm sạch dữ liệu
-            lap_data = self.clean_lap_data(lap_data)
-            
-            # Xử lý dữ liệu driver nếu có
-            if driver_files:
-                driver_dfs = [self._read_parquet_pandas(file) for file in driver_files]
-                driver_dfs = [df for df in driver_dfs if df is not None]
-                
-                if driver_dfs:
-                    driver_data = pd.concat(driver_dfs, ignore_index=True)
-                    driver_data = self.clean_driver_data(driver_data)
-                    
-                    # Kết hợp dữ liệu
-                    lap_data = self.merge_lap_with_driver(lap_data, driver_data)
-            
-            # Lưu dữ liệu đã xử lý
-            return self.save_processed_data(lap_data, year, "laps")
+        # Đọc dữ liệu lap
+        lap_df = self._read_parquet_spark(lap_files)
+        if lap_df is None:
+            logger.warning(f"Failed to read lap data for {year}")
+            return None
+        
+        # Chọn và xây dựng đặc trưng
+        processed_df = self.select_features(lap_df)
+        
+        # Tạo thư mục cho năm
+        year_dir = config.PROCESSED_DATA_DIR / str(year)
+        year_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Tạo đường dẫn file
+        output_path = year_dir / "race_features.parquet"
+        
+        # Lưu file
+        processed_df.write.mode("overwrite").parquet(str(output_path))
+        
+        logger.info(f"Processed race data saved to {output_path}")
+        return output_path
     
-    def process_all_seasons(self, years: List[int] = None) -> Dict[int, Dict[str, Path]]:
+    def process_all_years(self, years: List[int] = None) -> Dict[int, Path]:
         """
-        Xử lý dữ liệu cho nhiều mùa giải
+        Xử lý dữ liệu cho nhiều năm
         
         Args:
             years: Danh sách năm cần xử lý, None để xử lý tất cả các năm có dữ liệu
@@ -372,24 +308,18 @@ class F1Processor:
         """
         if years is None:
             # Lấy danh sách năm từ thư mục raw
-            years = [int(d.name) for d in config.RAW_DATA_DIR.iterdir() if d.is_dir() and d.name.isdigit()]
+            years = [int(d.name) for d in config.RAW_DATA_DIR.iterdir() 
+                    if d.is_dir() and d.name.isdigit()]
             
         logger.info(f"Processing data for years: {years}")
         
         results = {}
         
         for year in years:
-            year_results = {}
-            
-            # Xử lý dữ liệu lap
-            lap_path = self.process_season_laps(year)
-            if lap_path:
-                year_results['laps'] = lap_path
+            output_path = self.process_race_data(year)
+            if output_path:
+                results[year] = output_path
                 
-            # TODO: Xử lý các loại dữ liệu khác (results, telemetry, ...)
-            
-            results[year] = year_results
-            
         return results
     
     def close(self):
@@ -400,33 +330,29 @@ class F1Processor:
 
 
 # Hàm tiện ích để sử dụng từ CLI
-def process_data_for_years(years: List[int] = None, use_spark: bool = False) -> Dict[int, Dict[str, Path]]:
+def process_data(years: List[int] = None) -> Dict[int, Path]:
     """
     Hàm tiện ích để xử lý dữ liệu cho nhiều năm
     
     Args:
         years: Danh sách năm cần xử lý, None để xử lý tất cả các năm có dữ liệu
-        use_spark: Sử dụng Spark để xử lý dữ liệu lớn
         
     Returns:
         Dict chứa kết quả xử lý
     """
-    processor = F1Processor(use_spark=use_spark)
+    processor = F1Processor(use_spark=True)
     try:
-        return processor.process_all_seasons(years)
+        return processor.process_all_years(years)
     finally:
         processor.close()
 
 
 if __name__ == "__main__":
-    # Ví dụ sử dụng từ command line
-    import sys
     import argparse
     
-    parser = argparse.ArgumentParser(description='Process F1 data')
-    parser.add_argument('--years', type=int, nargs='+', help='Years to process')
-    parser.add_argument('--spark', action='store_true', help='Use Spark for processing')
+    parser = argparse.ArgumentParser(description="Process F1 data")
+    parser.add_argument("--years", type=int, nargs="+", help="Years to process")
     
     args = parser.parse_args()
     
-    process_data_for_years(args.years, args.spark)
+    process_data(args.years)
