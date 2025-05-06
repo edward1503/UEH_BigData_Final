@@ -6,12 +6,13 @@ This project implements an end-to-end data pipeline for Formula 1 racing analyti
 
 ## Main Features
 - Access to F1 Telementry data via FastF1 API.
-- 
+- Perform Data Cleaning and validation.
+- Predict the race results.
 
 ## Pipeline
 - The pipeline follows a modern data engineering architecture:
 
-- Data Collection: Raw data extraction from [FastF1 API]{https://docs.fastf1.dev/}.
+- Data Collection: Raw data extraction from {FastF1 API}[https://docs.fastf1.dev/].
 
 - Data Processing: Transformation using Apache Spark.
 
