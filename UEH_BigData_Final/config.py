@@ -1,11 +1,10 @@
 """
 Configuration Module - Central config for F1 Analytics project
 
-Mô-đun này quản lý tất cả cấu hình cho dự án, bao gồm:
+Module này quản lý tất cả cấu hình cho dự án, bao gồm:
 - Đường dẫn thư mục dữ liệu
 - Cấu hình cho FastF1 API
 - Cấu hình cho Spark
-- Tham số cho các mô hình ML
 """
 
 import os
@@ -76,41 +75,6 @@ SPARK_CONFIG: Dict[str, str] = {
     "spark.sql.shuffle.partitions": os.getenv("SPARK_SHUFFLE_PARTITIONS", "8"),
     "spark.serializer": "org.apache.spark.serializer.KryoSerializer",
     "spark.sql.execution.arrow.pyspark.enabled": "true"
-}
-
-# ====================== MODEL CONFIGURATION ======================
-# Tham số cho các mô hình ML
-MODEL_PARAMS: Dict[str, Dict[str, Any]] = {
-    "random_forest": {
-        "n_estimators": int(os.getenv("RF_N_ESTIMATORS", "100")),
-        "max_depth": int(os.getenv("RF_MAX_DEPTH", "10")),
-        "random_state": 42
-    },
-    "gradient_boosting": {
-        "n_estimators": int(os.getenv("GB_N_ESTIMATORS", "100")),
-        "learning_rate": float(os.getenv("GB_LEARNING_RATE", "0.1")),
-        "max_depth": int(os.getenv("GB_MAX_DEPTH", "5")),
-        "random_state": 42
-    }
-}
-
-# ====================== FEATURE CONFIGURATION ======================
-# Cấu hình cho feature engineering
-FEATURE_CONFIG: Dict[str, Any] = {
-    "window_sizes": [3, 5, 10],  # Kích thước cửa sổ cho các tính năng rolling
-    "target_variable": "position",
-    "categorical_features": ["driver_id", "team", "track_id", "compound"],
-    "numerical_features": [
-        "lap_time", "sector1_time", "sector2_time", "sector3_time", 
-        "speed_trap", "tyre_life"
-    ]
-}
-
-# ====================== MLFLOW CONFIGURATION ======================
-# Cấu hình MLflow cho tracking experiments
-MLFLOW_CONFIG: Dict[str, str] = {
-    "tracking_uri": os.getenv("MLFLOW_TRACKING_URI", ""),
-    "experiment_name": os.getenv("MLFLOW_EXPERIMENT_NAME", "f1-analytics")
 }
 
 # ====================== HELPER FUNCTIONS ======================
