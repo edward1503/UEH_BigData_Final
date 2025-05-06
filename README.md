@@ -1,4 +1,4 @@
-# An Application of Big Data in Analyzing and Forecasting Formula 1 Results
+# UEH Big Data Final Project - An Application of Big Data in Analyzing and Forecasting Formula 1 Results
 <h1 align="center">
 <img src="UEH_BigData_Final/picture/f1 rmmd.jpg" width="400">
 </h1><br>
