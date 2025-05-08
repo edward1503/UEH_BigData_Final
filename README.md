@@ -6,12 +6,13 @@
 A comprehensive data pipeline for collecting, processing, and analyzing Formula 1 racing data to predict race outcomes using machine learning and big data technology. 
 
 ## Contributor
+Intructor: Dr. Nguyễn Mạnh Tuấn.
 1. Nguyễn Đôn Đức.
 2. Nguyễn Thành Vinh.
 3. Đỗ Nhật Phương.
 4. Bùi Tiến Hiếu.
 
-Intructor: Dr. Nguyễn Mạnh Tuấn.
+
 
 # Overview
 This project implements an end-to-end data pipeline for Formula 1 racing analytics. It collects historical race data from the FastF1 API, processes and transforms the data using Apache Spark, and builds machine learning models to predict race outcomes. The pipeline is designed to be scalable, maintainable, and reproducible.
